@@ -1,0 +1,11 @@
+Socket open
+Socket options set
+Socket open
+Socket options set
+Bound
+Listening
+Accepted
+open(conf.sdltest, 521, 438):8
+lseek(8, 0, 2):0
+close(8):0
+bexit(0)

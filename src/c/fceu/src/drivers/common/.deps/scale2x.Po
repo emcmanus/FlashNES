@@ -1,0 +1,13 @@
+drivers/common/scale2x.o 22086.achacks.o: drivers/common/scale2x.c \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
+  drivers/common/scale2x.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/assert.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
+
+drivers/common/scale2x.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/assert.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h:

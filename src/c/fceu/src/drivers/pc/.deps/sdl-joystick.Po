@@ -1,0 +1,426 @@
+drivers/pc/sdl-joystick.o 22608.achacks.o: drivers/pc/sdl-joystick.c \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/unistd.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/endian.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_pthreadtypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/select.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_sigset.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/unistd.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/fcntl.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/errno.h \
+  drivers/pc/sdl.h /Users/edmcmanus/alchemy/usr/local/include/SDL.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_main.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_config.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_platform.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_config_flash.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_platform.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdarg.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stddef.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/ctype.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/_ctype.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/runetype.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_audio.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_endian.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_mutex.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_thread.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_mutex.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_rwops.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_cdrom.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_cpuinfo.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_endian.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_events.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_active.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_keyboard.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_keysym.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_mouse.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_video.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_rwops.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_joystick.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_quit.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_loadso.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_mutex.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_rwops.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_thread.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_timer.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_error.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_video.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_version.h \
+  /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
+  /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
+  drivers/pc/main.h drivers/pc/../../driver.h drivers/pc/../../types.h \
+  drivers/pc/../../git.h drivers/pc/../../debug.h \
+  drivers/pc/../../x6502struct.h drivers/pc/../common/config.h \
+  drivers/pc/../common/args.h drivers/pc/dface.h drivers/pc/input.h
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/unistd.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/endian.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_pthreadtypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/select.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_sigset.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/unistd.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/fcntl.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/errno.h:
+
+drivers/pc/sdl.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_main.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_config.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_platform.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_config_flash.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_platform.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdarg.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stddef.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/ctype.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/_ctype.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/runetype.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_audio.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_endian.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_mutex.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_thread.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_mutex.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_rwops.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_cdrom.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_cpuinfo.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_endian.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_events.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_active.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_keyboard.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_keysym.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_mouse.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_video.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_rwops.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_joystick.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_quit.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_loadso.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_mutex.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_rwops.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_thread.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_timer.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_error.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_video.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_version.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/begin_code.h:
+
+/Users/edmcmanus/alchemy/usr/local/include/close_code.h:
+
+drivers/pc/main.h:
+
+drivers/pc/../../driver.h:
+
+drivers/pc/../../types.h:
+
+drivers/pc/../../git.h:
+
+drivers/pc/../../debug.h:
+
+drivers/pc/../../x6502struct.h:
+
+drivers/pc/../common/config.h:
+
+drivers/pc/../common/args.h:
+
+drivers/pc/dface.h:
+
+drivers/pc/input.h:

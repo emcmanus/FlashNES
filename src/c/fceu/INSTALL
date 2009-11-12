@@ -1,0 +1,20 @@
+To compile and install FCE Ultra, follow these steps:
+
+	1.  Run "./configure".  If you want OpenGL support(which you probably do), and you
+	    have the OpenGL headers installed, run configure with "--with-opengl".
+	    To see all possible compilation options, run "./configure --help".
+
+	    If you're compiling under Mac OS X, you should probably run configure
+	    with "--disable-sdltest".
+
+	    If you are compiling for MS Windows, and you want a GUI, try something like:
+
+		./configure --with-nativewin32
+		windres -o src/res.o src/drivers/win/res.res
+		make
+
+	    The "windres" command is necessary because I can't get automake to recognize
+	    the resource object correctly.
+
+	2.  Optionally, run "make install".  This is not well-tested, so it may do
+	    EVIL THINGS.

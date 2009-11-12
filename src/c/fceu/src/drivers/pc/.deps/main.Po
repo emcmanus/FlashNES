@@ -1,0 +1,123 @@
+drivers/pc/main.o 22434.achacks.o: drivers/pc/main.c \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/unistd.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/endian.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_pthreadtypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/select.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_sigset.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/unistd.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/signal.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/signal.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/signal.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/trap.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/time.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/time.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stat.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/errno.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
+  drivers/pc/main.h drivers/pc/../../driver.h drivers/pc/../../types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h \
+  drivers/pc/../../git.h drivers/pc/../../debug.h \
+  drivers/pc/../../x6502struct.h drivers/pc/../common/config.h \
+  drivers/pc/../common/args.h drivers/pc/throttle.h \
+  drivers/pc/../common/cheat.h drivers/pc/input.h drivers/pc/dface.h \
+  drivers/pc/usage.h
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/unistd.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/endian.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_pthreadtypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/select.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_sigset.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/unistd.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/signal.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/signal.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/signal.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/trap.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/time.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/time.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stat.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/errno.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h:
+
+drivers/pc/main.h:
+
+drivers/pc/../../driver.h:
+
+drivers/pc/../../types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h:
+
+drivers/pc/../../git.h:
+
+drivers/pc/../../debug.h:
+
+drivers/pc/../../x6502struct.h:
+
+drivers/pc/../common/config.h:
+
+drivers/pc/../common/args.h:
+
+drivers/pc/throttle.h:
+
+drivers/pc/../common/cheat.h:
+
+drivers/pc/input.h:
+
+drivers/pc/dface.h:
+
+drivers/pc/usage.h:

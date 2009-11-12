@@ -1,0 +1,52 @@
+"Namco 106" games:
+
+FM = Fancy mirroring
+AM = Alternate/hardwired mirroring
+
+
+
+Battle Fleet	-	128 RAM
+
+Chibi Maruko Chan - Uki Uki Shopping	-	AM, No IRQ
+
+DDS 2		-	128 RAM, exp sound, 8KB WRAM
+Dokuganryuu Masamune	- 128 RAM
+Dragon Ninja	-	FM, IRQ
+Dream Master	-	AM
+
+Erika to Satoru	-	128 RAM, exp sound
+
+Family Circuit 91 -	AM?, No IRQ, 8KB WRAM
+
+Famista '90	-	NM, IRQ, 128 RAM
+Famista '91	-	Game writes like NM and IRQ at init, but it doesn't seem to use
+			either in the game.  Probably for compatibility with the more
+			featured chip.  I'll go with:
+			AM, No IRQ
+Famista '92	-	AM, No IRQ
+Famista '93	-	AM, No IRQ
+Famista '94	-	AM, No IRQ
+
+Final Lap	-	128 RAM, exp sound
+Heisei Tensai Bakabon	-	 AM, No IRQ
+Hydlide 3	-	128 RAM
+Juvei Quest	-	FM, IRQ, 8KB WRAM
+Kaijuu Monogatari	128 RAM?
+Mappy Kids	-	128 RAM, exp sound
+Mind Seeker	-	128 RAM
+
+Namco Classic	-	FM, IRQ
+
+Namco Classic 2	-	128 RAM, exp sound
+Rolling Thunder	-	128 RAM, exp sound
+Sangokushi - Chuugen no Hasha	-	FM, IRQ, 8KB WRAM(?)
+Sangokushi 2	-	128 RAM, exp sound
+Splatter House	-	FM, No IRQ
+Star Wars	-	FM, IRQ
+
+Top Striker	-	AM, No IRQ
+
+Wagyan Land 2	-	AM, No IRQ
+Wagyan Land 3	-	AM, No IRQ
+
+Youkai Douchuuki -	128 RAM, exp sound

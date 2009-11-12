@@ -1,0 +1,53 @@
+drivers/common/cheat.o 21651.achacks.o: drivers/common/cheat.c \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/ctype.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/_ctype.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/runetype.h \
+  drivers/common/../../driver.h drivers/common/../../types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h \
+  drivers/common/../../git.h drivers/common/../../debug.h \
+  drivers/common/../../x6502struct.h
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/ctype.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/_ctype.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/runetype.h:
+
+drivers/common/../../driver.h:
+
+drivers/common/../../types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h:
+
+drivers/common/../../git.h:
+
+drivers/common/../../debug.h:
+
+drivers/common/../../x6502struct.h:

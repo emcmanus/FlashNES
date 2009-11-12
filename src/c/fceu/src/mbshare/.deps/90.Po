@@ -1,0 +1,73 @@
+mbshare/90.o 21216.achacks.o: mbshare/90.c \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h mbshare/mapinc.h \
+  mbshare/../types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h \
+  mbshare/../x6502.h mbshare/../x6502struct.h mbshare/../fceu.h \
+  mbshare/../git.h mbshare/../driver.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h \
+  mbshare/../types.h mbshare/../debug.h mbshare/../ppu.h \
+  mbshare/../cart.h mbshare/../memory.h mbshare/../sound.h \
+  mbshare/../state.h mbshare/../cheat.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
+
+mbshare/mapinc.h:
+
+mbshare/../types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h:
+
+mbshare/../x6502.h:
+
+mbshare/../x6502struct.h:
+
+mbshare/../fceu.h:
+
+mbshare/../git.h:
+
+mbshare/../driver.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h:
+
+mbshare/../types.h:
+
+mbshare/../debug.h:
+
+mbshare/../ppu.h:
+
+mbshare/../cart.h:
+
+mbshare/../memory.h:
+
+mbshare/../sound.h:
+
+mbshare/../state.h:
+
+mbshare/../cheat.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h:

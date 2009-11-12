@@ -1,0 +1,101 @@
+general.o 10077.achacks.o: general.c \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdarg.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/endian.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_pthreadtypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/select.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_sigset.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stat.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/time.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/time.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/unistd.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/unistd.h types.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h \
+  fceu.h git.h driver.h debug.h x6502struct.h general.h state.h movie.h \
+  md5.h
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_null.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdarg.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/endian.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_pthreadtypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/select.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_sigset.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stat.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/time.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/time.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/unistd.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/unistd.h:
+
+types.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/stdint.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_stdint.h:
+
+fceu.h:
+
+git.h:
+
+driver.h:
+
+debug.h:
+
+x6502struct.h:
+
+general.h:
+
+state.h:
+
+movie.h:
+
+md5.h:

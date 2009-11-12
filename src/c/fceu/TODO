@@ -1,0 +1,50 @@
+The following games are broken to some extent:
+
+Crystalis:		Mostly working, but the screen jumps around during
+			dialogue.  It apparently resets the MMC3 IRQ counter
+			mid-scanline.  It'll require low-level PPU and MMC3
+			IRQ counter emulation to function properly.
+
+Kickmaster:		IRQ occurs a few CPU cycles too late, interferes with NMI routine,
+			and causes the game to lock up after the second boss.  Luckily, there
+			are passwords, at least.
+			*"FIXED" BY HACK*
+
+Kyoro Chan Land:	Expects a sprite hit to happen, but it has sprite 0 over
+			transparent background.
+
+Star Wars(PAL Beam Software version):
+			MMC3 IRQ occurs when it shouldn't, similar to the problem in
+			Kickmaster.
+			*"FIXED" BY HACK*
+
+*** General Features:
+
+ Modify the video blitting/filtering code to run in a separate thread.  This should make
+ SMP system owners happy, and it would reduce sound problems due to excessive video
+ processing times(such as what occurs in double buffering).  So, after this is implemented,
+ we run a loop that writes sound data to the sound device's buffer.  When we run out of data
+ to write, and the video thread isn't finished with the last frame, the current frame's data 
+ will be thrown away.  Something similar is achieved now by increasing the sound buffer size,
+ and seeing how full it is before even trying to process that frame's video data.  Obviously,
+ this increases sound latency.
+ This new method would probably only work well on systems that have small time slices.
+ MS Windows has an API call to achieve that, and Linux 2.6 has small time slices, doesn't it?
+ In any case, I don't think SDL in its current state likes multi-threaded access to video.  Bah.
+
+ Remappable command keys(to multiple keys on the keyboard and a joystick).
+
+ Fix possible UNIF crashes(if no PRGx or CHRx chunks exist, it may crash,
+ due to changes made in 0.92).
+
+*** Emulation:
+
+ Separate mapper 32 into two separate mappers.  Marat was being silly.
+
+ Figure out what mapper 113 really is.
+
+ Sound frame count stuff on PAL games(is it correct?).
+ 
+ Fix FDS FM sound emulation.
+
+ Fix Zapper emulation(one version of Chiller still doesn't always work correctly).

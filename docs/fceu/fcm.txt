@@ -1,0 +1,29 @@
+FCE Ultra Movie File Format
+	- Updated March 22, 2004
+
+The FCM file format is a somewhat "joined" file format.  The first part of a FCM
+file will contain an FCS-format state save.  After this data, the FCM-specific data
+begins, which is being referred to from this point.
+
+
+Currently, the only supported input scheme for a FCM is four joysticks.
+
+The FCM data consists of a stream of joystick commands:
+
+	dLLjjbbb
+
+	 d  = Dummy update, if set.  Used to reset frame timestamp.
+	LL  = timestamp length, in bytes(maximum of 3 bytes).
+	jj  = Which joystick(0-3).
+        bbb = Which button(0-7).
+
+	If the dummy update bit is set, a command can also have occurred.  Look at the
+	lower 5 bits:
+		0	=	Just a dummy update.
+		1	=	Reset
+		2	=	Power
+
+	The timestamp is stored after the joystick command, in LSB-first format.  It is
+	the number of frames since the last event.  A timestamp length of "0" is valid, to
+	be used when several different buttons need to change state at the same time(same frame,
+	at least).

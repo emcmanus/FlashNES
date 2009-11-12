@@ -1,0 +1,80 @@
+#
+# Getting FCE Ultra to build
+#
+
+FYI, Here's the basic porting heuristic:
+
+1) Run config
+2) If error, change config parameters to address errors, goto 1
+3) Else, run `make all` in `src/`
+4) If error, change config parameters to address errors, goto 1
+5) Success! Hook up to AS3
+
+
+Steps I already covered:
+
+First build and install FlashSDL. The Flash port of SDL can be grabbed from my GitHub repository at http://github.com/emcmanus/flashsdl/
+
+Change Alchemy's version of sdl-config to return the correct gcc parameters. (Might need to specify -L, -l, -I and -i.)
+
+
+Building FCE Ultra:
+
+To start, I tried configuring with:
+./configure --prefix=$ALCHEMY_HOME/.. --includedir=$ALCHEMY_HOME/avm2-libc/include --libdir=$ALCHEMY_HOME/avm2-libc/lib
+
+Additional compiler flags needed to be added to sdl-config:
+-DOSX -DFLASH -I$ALCHEMY_HOME/../usr/local/include -L$ALCHEMY_HOME/../usr/local/lib
+
+(-DOSX and -DFLASH are important since we're still referencing the SDL headers, and be sure to expand $ALCHEMY_HOME if you need it in sdl-config because perl won't do it for you.)
+
+Now the config script passes the SDL test, but clearly we haven't disabled enough stuff when running it since we fail to build pretty early on (when running make clean all).
+
+Figuring out what to disable...
+
+First I see we need to set the preprocessor directives USE_JACKACK=0, and USE_SEXYAL=0, to force the port to use SDL's audio driver. We can do that quickly by passing the CFLAGS environment variable. (configure.ac doesn't accept these as general config vars.)
+
+Trying:
+./configure --prefix=$ALCHEMY_HOME/.. --includedir=$ALCHEMY_HOME/avm2-libc/include --libdir=$ALCHEMY_HOME/avm2-libc/lib CFLAGS='-DUSE_SEXYAL=0 -DUSE_JACKACK=0'
+
+That helped. Now we're targeting SDL for audio rather than SEXYAL or Jack ACK.
+
+On to netplay... Unfortunately FCE Ultra doesn't allow you to build without netplay support. We'll need to add our own preprocessor directives (possibly: "#ifndef __FLASH__", or better "#ifndef __DISABLE_NETPLAY__", since it's not necessarily a flash-specific parameter).
+
+But that's not true! We should be able to define NETWORK=0, according configure.ac. Now we configure with:
+
+./configure --prefix=$ALCHEMY_HOME/.. --includedir=$ALCHEMY_HOME/avm2-libc/include --libdir=$ALCHEMY_HOME/avm2-libc/lib CFLAGS='-DUSE_SEXYAL=0 -DUSE_JACKACK=0 -DNETWORK=0'
+
+Now we get the error that CloseGame() is defined twice. Looks like main.c and fceu.c are both being linked, when we probably only want one.
+
+After investigating, there's no predefined directives to only compile one version of CloseGame(). We'll get back to this later, but first let's clean up the build process.
+
+Now that we have a semi-reasonable Makefile we should branch it into Makefile.flash. This makes modifying directives easier than re-running ./configure [...]. Add any new directives to the variable MY_DEFS.
+
+So from now on, build using Makefile.flash like so (in /src):
+make -f Makefile.flash clean all;
+
+Getting back to the closeGame problem, there's clearly something wrong here. The Unix port should get into an infinite loop with CloseGame calling FCEUI_CloseGame which calls CloseGame again. The Win port wouldn't have this problem, which might explain why it went unnoticed. To address this for the flash port I moved the body of CloseGame in fceu.c into FCEUI_CloseGame, and added the appropriate conditionals with #ifndef FLASH.
+
+K, got it! Next, the compiler is complaining about netplay. Apparently -DNETWORK=0 doesn't do all we need.
+
+Whoops, only #ifdef NETWORK is used in the source. Changing all #ifdef's to #if's.
+
+Now we get past the linking and compiling stage, but now we're getting AS3 errors with the inline assembly. This is the first time I've seen this type of error in Alchemy, and I wouldn't expect it since it seems like LLVM should complain before emitting code!
+
+Maybe there's some inline assembly I missed... 
+
+Yep! There are some mmx assembly instructions for scaling. Changed all directives to check for the definition of FLASH. To really do this properly you'd have to surround all assembly with an #if __ASSEMBLY__ conditional, and set the value of __ASSEMBLY__ in configure. Instead, FCEU checks for environment matches: GNU_C and i386 must both be defined.
+
+Ok that's it. Now we get all the way through the generation of a SWC!
+
+
+*************************************************
+*************************************************
+
+TODO TOMORROW: Look at what I did for the SNES port and figure out how to handle file loading, video, etc. Probably need to change the methods in fceu.c.
+
+*************************************************
+*************************************************
+
+
