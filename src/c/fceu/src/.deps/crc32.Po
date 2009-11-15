@@ -1,4 +1,4 @@
-crc32.o 9468.achacks.o: crc32.c \
+crc32.o 67047.achacks.o: crc32.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h types.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_inttypes.h \

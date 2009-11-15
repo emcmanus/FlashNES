@@ -60,21 +60,34 @@ K, got it! Next, the compiler is complaining about netplay. Apparently -DNETWORK
 
 Whoops, only #ifdef NETWORK is used in the source. Changing all #ifdef's to #if's.
 
-Now we get past the linking and compiling stage, but now we're getting AS3 errors with the inline assembly. This is the first time I've seen this type of error in Alchemy, and I wouldn't expect it since it seems like LLVM should complain before emitting code!
+Now we get past the linking and compiling stage, but we're getting AS3 errors with the inline (AVM2) assembly. This is the first time I've seen this type of error in Alchemy, and I wouldn't expect it since it seems like LLVM should complain before emitting code!
 
-Maybe there's some inline assembly I missed... 
+Maybe there's some inline assembly I missed in the C source...
 
-Yep! There are some mmx assembly instructions for scaling. Changed all directives to check for the definition of FLASH. To really do this properly you'd have to surround all assembly with an #if __ASSEMBLY__ conditional, and set the value of __ASSEMBLY__ in configure. Instead, FCEU checks for environment matches: GNU_C and i386 must both be defined.
+Yep! There are some mmx assembly instructions for fast scaling. I changed all directives to check for the definition of FLASH. To really do this properly you'd have to surround all assembly with an #if __ALLOW_ASSEMBLY__ (or equiv.) conditional, and set the value of __ALLOW_ASSEMBLY__ in configure. Instead, FCEU checks the environment: GNU_C and i386 must both be defined.
 
-Ok that's it. Now we get all the way through the generation of a SWC!
+Ok that's it. Now we get all the way through the generation of a SWC. :)
+
+On to actually porting the application...
+
+Copied two files, drivers/pc/sdl.c and drivers/pc/main.c, into drivers/pc/flash_sdl.c and drivers/pc/flash_main.c, respectively
+
+Removed all conditional statements guaranteed to not exist in the flash port, like OpenGL, and networking (at the very least we'll never use the built-in netplay)
+
+Traced the execution path through to the event loop, and separated this high level path into three components: setup, tick, and teardown. Each of these becomes a function exposed to the wrapper SWF.
+
+This should be pretty self-explanitory: Setup contains the initialization calls (initializes display buffers, sound, input), tick advances the emulator state and polls for events, and teardown (which isn't really necessary in the VM), frees memory and performs cleanup.
+
+Next I updated Makefile.flash to link against the correct object files, and also grepped through the source updating any instances of #include "main.h" and #include "sdl.h" to point to the the updated files (if FLASH is defined).
+
+And a test compile of the SWC..
+
+Had to update the dependencies file, an artifact of configure. Should strip this requirement from the makefile. Had to fix some missing definitions, added some header includes to the new flash_* files.
+
+Due to missing definitions, I split up the setup function into two sub-routines: setup_main and setup_sdl.
+
+Ok, we're building again! 
 
 
-*************************************************
-*************************************************
-
-TODO TOMORROW: Look at what I did for the SNES port and figure out how to handle file loading, video, etc. Probably need to change the methods in fceu.c.
-
-*************************************************
-*************************************************
 
 

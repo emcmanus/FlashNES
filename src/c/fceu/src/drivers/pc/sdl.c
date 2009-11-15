@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef FLASH
+#include "flash_sdl.h"
+#else
 #include "sdl.h"
+#endif
 #include "sdl-video.h"
 #if NETWORK
 #include "unix-netplay.h"
@@ -358,43 +362,47 @@ int DWaitButton(const uint8 *text, ButtConfig *bc, int wb)
  return(0);
 }
 
-#ifdef EXTGUI
-int FCEUSDLmain(int argc, char *argv[])
-#else
-int main(int argc, char *argv[])
-#endif
-{
-        FCEUD_Message("\nStarting FCE Ultra "FCEU_VERSION"...\n");
 
-        #ifdef WIN32
-        /* Taken from win32 sdl_main.c */
-        SDL_SetModuleHandle(GetModuleHandle(NULL));
-        #endif
+// Define Flash's main in flash_main.c
 
-	if(SDL_Init(SDL_INIT_VIDEO)) /* SDL_INIT_VIDEO Needed for (joystick config) event processing? */
-	{
-	 printf("Could not initialize SDL: %s.\n", SDL_GetError());
-	 return(-1);
-	}
-
-	#ifdef OPENGL
- 	 #ifdef APPLEOPENGL
-	 sdlhaveogl = 1;	/* Stupid something...  Hack. */
-	 #else
-	 if(!SDL_GL_LoadLibrary(0)) sdlhaveogl=1;
-	 else sdlhaveogl=0;
-	 #endif
+#ifndef FLASH
+	#ifdef EXTGUI
+	int FCEUSDLmain(int argc, char *argv[])
+	#else
+	int main(int argc, char *argv[])
 	#endif
-
-	SetDefaults();
-
 	{
-	 int ret=CLImain(argc,argv);
-	 SDL_Quit();
-	 return(ret?0:-1);
-	}
-}
+			FCEUD_Message("\nStarting FCE Ultra "FCEU_VERSION"...\n");
 
+			#ifdef WIN32
+			/* Taken from win32 sdl_main.c */
+			SDL_SetModuleHandle(GetModuleHandle(NULL));
+			#endif
+
+		if(SDL_Init(SDL_INIT_VIDEO)) /* SDL_INIT_VIDEO Needed for (joystick config) event processing? */
+		{
+		 printf("Could not initialize SDL: %s.\n", SDL_GetError());
+		 return(-1);
+		}
+
+		#ifdef OPENGL
+		 #ifdef APPLEOPENGL
+		 sdlhaveogl = 1;	/* Stupid something...  Hack. */
+		 #else
+		 if(!SDL_GL_LoadLibrary(0)) sdlhaveogl=1;
+		 else sdlhaveogl=0;
+		 #endif
+		#endif
+
+		SetDefaults();
+
+		{
+		 int ret=CLImain(argc,argv);
+		 SDL_Quit();
+		 return(ret?0:-1);
+		}
+	}
+#endif
 
 uint64 FCEUD_GetTime(void)
 {

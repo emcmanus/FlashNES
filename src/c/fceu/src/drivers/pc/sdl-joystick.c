@@ -26,7 +26,11 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#ifdef FLASH
+#include "flash_sdl.h"
+#else
 #include "sdl.h"
+#endif
 
 #define MAX_JOYSTICKS	32
 static SDL_Joystick *Joysticks[MAX_JOYSTICKS] = {NULL};

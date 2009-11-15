@@ -20,7 +20,11 @@
 
 #include <string.h>
 
+#ifdef FLASH
+#include "flash_main.h"
+#else
 #include "main.h"
+#endif
 #include "dface.h"
 #include "input.h"
 

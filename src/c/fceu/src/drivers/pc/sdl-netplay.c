@@ -1,4 +1,8 @@
+#ifdef FLASH
+#include "flash_sdl.h"
+#else
 #include "sdl.h"
+#endif
 #include <SDL/SDL_net.h>
 #include "sdl-netplay.h"
 

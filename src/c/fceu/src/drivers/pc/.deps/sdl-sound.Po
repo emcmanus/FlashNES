@@ -1,4 +1,4 @@
-drivers/pc/sdl-sound.o 22695.achacks.o: drivers/pc/sdl-sound.c \
+drivers/pc/sdl-sound.o 80280.achacks.o: drivers/pc/sdl-sound.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
@@ -8,7 +8,7 @@ drivers/pc/sdl-sound.o 22695.achacks.o: drivers/pc/sdl-sound.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
-  drivers/pc/sdl.h /Users/edmcmanus/alchemy/usr/local/include/SDL.h \
+  drivers/pc/flash_sdl.h /Users/edmcmanus/alchemy/usr/local/include/SDL.h \
   /Users/edmcmanus/alchemy/usr/local/include/SDL_main.h \
   /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
   /Users/edmcmanus/alchemy/usr/local/include/SDL_config.h \
@@ -128,11 +128,12 @@ drivers/pc/sdl-sound.o 22695.achacks.o: drivers/pc/sdl-sound.c \
   /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
   /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
   /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
-  drivers/pc/main.h drivers/pc/../../driver.h drivers/pc/../../types.h \
-  drivers/pc/../../git.h drivers/pc/../../debug.h \
-  drivers/pc/../../x6502struct.h drivers/pc/../common/config.h \
-  drivers/pc/../common/args.h drivers/pc/dface.h drivers/pc/input.h \
-  drivers/pc/../sexyal/sexyal.h
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/AS3.h \
+  drivers/pc/flash_main.h drivers/pc/../../driver.h \
+  drivers/pc/../../types.h drivers/pc/../../git.h \
+  drivers/pc/../../debug.h drivers/pc/../../x6502struct.h \
+  drivers/pc/../common/config.h drivers/pc/../common/args.h \
+  drivers/pc/dface.h drivers/pc/input.h drivers/pc/../sexyal/sexyal.h
 
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
 
@@ -152,7 +153,7 @@ drivers/pc/sdl-sound.o 22695.achacks.o: drivers/pc/sdl-sound.c \
 
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h:
 
-drivers/pc/sdl.h:
+drivers/pc/flash_sdl.h:
 
 /Users/edmcmanus/alchemy/usr/local/include/SDL.h:
 
@@ -394,7 +395,9 @@ drivers/pc/sdl.h:
 
 /Users/edmcmanus/alchemy/usr/local/include/close_code.h:
 
-drivers/pc/main.h:
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/AS3.h:
+
+drivers/pc/flash_main.h:
 
 drivers/pc/../../driver.h:
 

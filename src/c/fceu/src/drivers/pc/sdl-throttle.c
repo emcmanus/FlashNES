@@ -1,4 +1,8 @@
+#ifdef FLASH
+#include "flash_sdl.h"
+#else
 #include "sdl.h"
+#endif
 #include "throttle.h"
 
 static uint64 tfreq;

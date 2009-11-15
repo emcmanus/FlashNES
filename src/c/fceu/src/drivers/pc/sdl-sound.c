@@ -22,7 +22,11 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifdef FLASH
+#include "flash_sdl.h"
+#else
 #include "sdl.h"
+#endif
 
 #ifdef USE_SEXYAL
 

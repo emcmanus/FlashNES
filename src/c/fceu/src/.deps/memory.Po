@@ -1,4 +1,4 @@
-memory.o 10425.achacks.o: memory.c \
+memory.o 68007.achacks.o: memory.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \

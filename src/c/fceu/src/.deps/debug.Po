@@ -1,4 +1,4 @@
-debug.o 9555.achacks.o: debug.c \
+debug.o 67134.achacks.o: debug.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \

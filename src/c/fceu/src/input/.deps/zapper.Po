@@ -1,4 +1,4 @@
-input/zapper.o 12427.achacks.o: input/zapper.c \
+input/zapper.o 70008.achacks.o: input/zapper.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \

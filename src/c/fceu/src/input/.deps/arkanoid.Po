@@ -1,4 +1,4 @@
-input/arkanoid.o 12601.achacks.o: input/arkanoid.c \
+input/arkanoid.o 70182.achacks.o: input/arkanoid.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \

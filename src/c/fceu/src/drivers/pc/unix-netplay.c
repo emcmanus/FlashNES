@@ -33,7 +33,12 @@
 #include <netdb.h>
 #include <errno.h>
 #include <fcntl.h>
+
+#ifdef FLASH
+#include "flash_main.h"
+#else
 #include "main.h"
+#endif
 #include "dface.h"
 #include "unix-netplay.h"
 

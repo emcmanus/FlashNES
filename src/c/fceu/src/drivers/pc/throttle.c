@@ -1,5 +1,9 @@
 #include <sys/time.h>
+#ifdef FLASH
+#include "flash_main.h"
+#else
 #include "main.h"
+#endif
 #include "throttle.h"
 
 static uint64 tfreq;

@@ -1,4 +1,4 @@
-drivers/pc/sdl-joystick.o 22608.achacks.o: drivers/pc/sdl-joystick.c \
+drivers/pc/sdl-joystick.o 80193.achacks.o: drivers/pc/sdl-joystick.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
@@ -16,7 +16,7 @@ drivers/pc/sdl-joystick.o 22608.achacks.o: drivers/pc/sdl-joystick.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/unistd.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/fcntl.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/errno.h \
-  drivers/pc/sdl.h /Users/edmcmanus/alchemy/usr/local/include/SDL.h \
+  drivers/pc/flash_sdl.h /Users/edmcmanus/alchemy/usr/local/include/SDL.h \
   /Users/edmcmanus/alchemy/usr/local/include/SDL_main.h \
   /Users/edmcmanus/alchemy/usr/local/include/SDL_stdinc.h \
   /Users/edmcmanus/alchemy/usr/local/include/SDL_config.h \
@@ -132,10 +132,12 @@ drivers/pc/sdl-joystick.o 22608.achacks.o: drivers/pc/sdl-joystick.c \
   /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
   /Users/edmcmanus/alchemy/usr/local/include/begin_code.h \
   /Users/edmcmanus/alchemy/usr/local/include/close_code.h \
-  drivers/pc/main.h drivers/pc/../../driver.h drivers/pc/../../types.h \
-  drivers/pc/../../git.h drivers/pc/../../debug.h \
-  drivers/pc/../../x6502struct.h drivers/pc/../common/config.h \
-  drivers/pc/../common/args.h drivers/pc/dface.h drivers/pc/input.h
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/AS3.h \
+  drivers/pc/flash_main.h drivers/pc/../../driver.h \
+  drivers/pc/../../types.h drivers/pc/../../git.h \
+  drivers/pc/../../debug.h drivers/pc/../../x6502struct.h \
+  drivers/pc/../common/config.h drivers/pc/../common/args.h \
+  drivers/pc/dface.h drivers/pc/input.h
 
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h:
 
@@ -171,7 +173,7 @@ drivers/pc/sdl-joystick.o 22608.achacks.o: drivers/pc/sdl-joystick.c \
 
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/errno.h:
 
-drivers/pc/sdl.h:
+drivers/pc/flash_sdl.h:
 
 /Users/edmcmanus/alchemy/usr/local/include/SDL.h:
 
@@ -405,7 +407,9 @@ drivers/pc/sdl.h:
 
 /Users/edmcmanus/alchemy/usr/local/include/close_code.h:
 
-drivers/pc/main.h:
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/AS3.h:
+
+drivers/pc/flash_main.h:
 
 drivers/pc/../../driver.h:
 

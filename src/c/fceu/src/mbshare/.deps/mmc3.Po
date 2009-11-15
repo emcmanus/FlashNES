@@ -1,4 +1,4 @@
-mbshare/mmc3.o 20955.achacks.o: mbshare/mmc3.c \
+mbshare/mmc3.o 78540.achacks.o: mbshare/mmc3.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h mbshare/mapinc.h \
   mbshare/../types.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \

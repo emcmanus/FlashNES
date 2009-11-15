@@ -1,4 +1,4 @@
-mbshare/deirom.o 21303.achacks.o: mbshare/deirom.c \
+mbshare/deirom.o 78888.achacks.o: mbshare/deirom.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h mbshare/mapinc.h \
   mbshare/../types.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \

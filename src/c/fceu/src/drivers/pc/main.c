@@ -29,7 +29,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef FLASH
+#include "flash_main.h"
+#else
 #include "main.h"
+#endif
 #include "throttle.h"
 
 #include "../common/cheat.h"
@@ -325,21 +329,28 @@ int CloseGame(void)
 
 void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count);
 
+
+// This is our "tick" function
+
 void DoFun(void)
 {
-         uint8 *gfx;  
-         int32 *sound;
-         int32 ssize;
-         static int fskipc=0;
+	uint8 *gfx;  
+	int32 *sound;
+	int32 ssize;
+	static int fskipc=0;
          
-         #ifdef FRAMESKIP
-         fskipc=(fskipc+1)%(frameskip+1);
-         #endif
+	#ifdef FRAMESKIP
+	fskipc=(fskipc+1)%(frameskip+1);
+	#endif
          
-         if(NoWaiting) {gfx=0;}
-         FCEUI_Emulate(&gfx, &sound, &ssize, fskipc);
-         FCEUD_Update(gfx, sound, ssize);
-}   
+	if(NoWaiting) {gfx=0;}
+	FCEUI_Emulate(&gfx, &sound, &ssize, fskipc);
+	FCEUD_Update(gfx, sound, ssize);
+}
+
+
+// Driver's main() impl. Called from SDL.c
+// Contains event loop
 
 int CLImain(int argc, char *argv[])
 {
@@ -347,50 +358,64 @@ int CLImain(int argc, char *argv[])
 
 	if(!(ret=FCEUI_Initialize()))
          return(0);
-
-        DrBaseDirectory=GetBaseDirectory();
+	
+// Non-flash stuff
+#ifndef FLASH
+	
+	DrBaseDirectory=GetBaseDirectory();
 	FCEUI_SetBaseDirectory(DrBaseDirectory);
-
+	
 	CreateDirs();
-
+	
 	#ifdef EXTGUI
-	if(argc==2 && !strcmp(argv[1],"-help")) // I hope no one has a game named "-help" :b
+		if(argc==2 && !strcmp(argv[1],"-help")) // I hope no one has a game named "-help" :b
 	#else
-        if(argc<=1) 
+		if(argc<=1) 
 	#endif
-        {
-         ShowUsage(argv[0]);
-         return(0);
-        }
-
-        LoadConfig();
-        DoArgs(argc-2,&argv[1]);
+	{
+		ShowUsage(argv[0]);
+		return(0);
+	}
+	
+	LoadConfig();
+	DoArgs(argc-2,&argv[1]);
+#endif
+	
 	FCEUI_SetNTSCTH(ntsccol, ntsctint, ntschue);
+	
 	if(cpalette)
-	 LoadCPalette();
+		LoadCPalette();
 
+#if !defined(FLASH) && defined(EXTGUI)
 	/* All the config files and arguments are parsed now. */
-	#ifdef EXTGUI
-        return(1);
+	return(1);
+#endif
+	
 
-	#else
-        if(!LoadGame(argv[argc-1]))
-        {
-         DriverKill();
-         return(0);
-        }
-
+#ifndef FLASH
+	// get path from CLI
+	if(!LoadGame(argv[argc-1]))
+#else
+	// Load our fake path -- Flash will provide the ROM at this address
+	if(!LoadGame("gamepath.rom"))
+#endif
+	{
+		// Error! Exit.
+		DriverKill();
+		return(0);
+	}
+	
+	// Main event loop
 	while(CurGame)
 	 DoFun();
-
-        //CloseGame();
-        
-	SaveConfig();
-
-        FCEUI_Kill();
-
+	
+	#ifndef FLASH
+		SaveConfig();
 	#endif
-        return(1);
+	
+	FCEUI_Kill();
+	
+	return(1);
 }
 
 static int DriverInitialize(FCEUGI *gi)

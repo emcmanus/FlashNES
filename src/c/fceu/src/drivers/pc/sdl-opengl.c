@@ -11,7 +11,11 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifdef FLASH
+#include "flash_sdl.h"
+#else
 #include "sdl.h"
+#endif
 #include "sdl-opengl.h"
 #include "../common/vidblit.h"
 

@@ -92,15 +92,10 @@ bin_PROGRAMS = fceu
 # soundexp.c
 fceu_SOURCES = fceustr.c cart.c cheat.c crc32.c debug.c endian.c fceu.c fds.c file.c filter.c general.c ines.c input.c md5.c memory.c netplay.c nsf.c palette.c ppu.c sound.c state.c unif.c video.c vsuni.c wave.c x6502.c movie.c unzip.c boards/8237.c boards/h2288.c boards/malee.c boards/novel.c boards/sachen.c boards/simple.c boards/super24.c boards/supervision.c input/cursor.c input/zapper.c input/powerpad.c input/arkanoid.c input/shadow.c input/fkb.c input/fkb.h input/hypershot.c input/mahjong.c input/oekakids.c input/ftrainer.c input/quiz.c input/toprider.c input/bworld.c mappers/mmc2and4.c mappers/simple.c mappers/112.c mappers/117.c mappers/15.c mappers/151.c mappers/16.c mappers/17.c mappers/18.c mappers/180.c mappers/184.c  mappers/21.c mappers/22.c mappers/225.c mappers/226.c mappers/228.c mappers/229.c mappers/23.c mappers/24and26.c mappers/240.c mappers/246.c mappers/25.c mappers/32.c mappers/33.c mappers/40.c mappers/41.c mappers/6.c mappers/65.c mappers/67.c mappers/68.c mappers/69.c mappers/71.c mappers/73.c mappers/75.c mappers/76.c mappers/79.c mappers/8.c mappers/80.c mappers/85.c mappers/95.c mappers/97.c mappers/99.c mappers/182.c mappers/46.c mappers/43.c mappers/42.c mappers/113.c mappers/86.c mappers/89.c mappers/83.c mappers/77.c mappers/92.c mappers/88.c mappers/248.c mappers/emu2413.c mappers/242.c mappers/232.c mappers/72.c mappers/234.c mappers/227.c mappers/82.c mappers/189.c mappers/51.c mappers/91.c mappers/114.c mappers/241.c mappers/235.c mappers/57.c mappers/255.c mappers/61.c mappers/59.c mappers/193.c mappers/50.c mappers/60.c mappers/62.c mappers/244.c mappers/230.c mappers/200.c mappers/201.c mappers/202.c mappers/203.c mappers/231.c mappers/208.c mappers/58.c mappers/187.c mbshare/mmc5.c mbshare/mmc3.c mbshare/mmc1.c mbshare/tengen.c mbshare/90.c mbshare/deirom.c mbshare/n106.c mbshare/164.c drivers/common/args.c drivers/common/cheat.c drivers/common/config.c drivers/common/vidblit.c drivers/common/hq2x.c drivers/common/hq3x.c drivers/common/scale2x.c drivers/common/scale3x.c drivers/common/scalebit.c $(sexyal_SOURCES) $(fceud_SOURCES)
 
-#sexyal_SOURCES = drivers/sexyal/sexyal.c drivers/sexyal/md5.c drivers/sexyal/smallc.c drivers/sexyal/convert.c $(TMP_SEXYAL)
 
-#TMP_SEXYAL = drivers/sexyal/drivers/oss.c
-##TMP_SEXYAL = drivers/sexyal/drivers/dsound.c
-
-#fceud_SOURCES = drivers/win/cheat.c drivers/win/debug.c drivers/win/input.c drivers/win/joystick.c drivers/win/keyboard.c drivers/win/log.c drivers/win/main.c drivers/win/netplay.c drivers/win/res.res
-fceud_SOURCES = drivers/pc/input.c drivers/pc/main.c drivers/pc/sdl.c drivers/pc/sdl-joystick.c drivers/pc/sdl-sound.c drivers/pc/sdl-throttle.c drivers/pc/sdl-video.c drivers/pc/unix-netplay.c $(TMP_OGL)
-
-#TMP_OGL = drivers/pc/sdl-opengl.c
+# Includes flash sources!
+flash_SOURCES = drivers/pc/flash_main.c drivers/pc/flash_sdl.c
+fceud_SOURCES = $(flash_SOURCES) drivers/pc/input.c drivers/pc/sdl-joystick.c drivers/pc/sdl-sound.c drivers/pc/sdl-throttle.c drivers/pc/sdl-video.c drivers/pc/unix-netplay.c $(TMP_OGL)
 
 DEFAULT_INCLUDES = 
 subdir = src
@@ -129,8 +124,8 @@ PROGRAMS = $(bin_PROGRAMS)
 #	drivers/win/main.$(OBJEXT) \
 #	drivers/win/netplay.$(OBJEXT) res.$(OBJEXT)
 am__objects_4 = drivers/pc/input.$(OBJEXT) \
-	drivers/pc/main.$(OBJEXT) \
-	drivers/pc/sdl.$(OBJEXT) \
+	drivers/pc/flash_main.$(OBJEXT) \
+	drivers/pc/flash_sdl.$(OBJEXT) \
 	drivers/pc/sdl-joystick.$(OBJEXT) \
 	drivers/pc/sdl-sound.$(OBJEXT) \
 	drivers/pc/sdl-throttle.$(OBJEXT) \
@@ -251,13 +246,13 @@ DEP_FILES = ./$(DEPDIR)/cart.Po ./$(DEPDIR)/cheat.Po \
 	drivers/common/$(DEPDIR)/scalebit.Po \
 	drivers/common/$(DEPDIR)/vidblit.Po \
 	drivers/pc/$(DEPDIR)/input.Po \
-	drivers/pc/$(DEPDIR)/main.Po \
+	drivers/pc/$(DEPDIR)/flash_main.Po \
 	drivers/pc/$(DEPDIR)/sdl-joystick.Po \
 	drivers/pc/$(DEPDIR)/sdl-opengl.Po \
 	drivers/pc/$(DEPDIR)/sdl-sound.Po \
 	drivers/pc/$(DEPDIR)/sdl-throttle.Po \
 	drivers/pc/$(DEPDIR)/sdl-video.Po \
-	drivers/pc/$(DEPDIR)/sdl.Po \
+	drivers/pc/$(DEPDIR)/flash_sdl.Po \
 	drivers/pc/$(DEPDIR)/unix-netplay.Po \
 	drivers/sexyal/$(DEPDIR)/convert.Po \
 	drivers/sexyal/$(DEPDIR)/md5.Po \
@@ -710,9 +705,9 @@ drivers/pc/$(DEPDIR)/.dirstamp:
 	@: > drivers/pc/$(DEPDIR)/.dirstamp
 drivers/pc/input.$(OBJEXT): drivers/pc/input.c drivers/pc/.dirstamp \
 	drivers/pc/$(DEPDIR)/.dirstamp
-drivers/pc/main.$(OBJEXT): drivers/pc/main.c drivers/pc/.dirstamp \
+drivers/pc/flash_main.$(OBJEXT): drivers/pc/flash_main.c drivers/pc/.dirstamp \
 	drivers/pc/$(DEPDIR)/.dirstamp
-drivers/pc/sdl.$(OBJEXT): drivers/pc/sdl.c drivers/pc/.dirstamp \
+drivers/pc/flash_sdl.$(OBJEXT): drivers/pc/flash_sdl.c drivers/pc/.dirstamp \
 	drivers/pc/$(DEPDIR)/.dirstamp
 drivers/pc/sdl-joystick.$(OBJEXT): drivers/pc/sdl-joystick.c \
 	drivers/pc/.dirstamp drivers/pc/$(DEPDIR)/.dirstamp
@@ -750,13 +745,13 @@ mostlyclean-compile:
 	-rm -f drivers/common/scalebit.$(OBJEXT)
 	-rm -f drivers/common/vidblit.$(OBJEXT)
 	-rm -f drivers/pc/input.$(OBJEXT)
-	-rm -f drivers/pc/main.$(OBJEXT)
+	-rm -f drivers/pc/flash_main.$(OBJEXT)
 	-rm -f drivers/pc/sdl-joystick.$(OBJEXT)
 	-rm -f drivers/pc/sdl-opengl.$(OBJEXT)
 	-rm -f drivers/pc/sdl-sound.$(OBJEXT)
 	-rm -f drivers/pc/sdl-throttle.$(OBJEXT)
 	-rm -f drivers/pc/sdl-video.$(OBJEXT)
-	-rm -f drivers/pc/sdl.$(OBJEXT)
+	-rm -f drivers/pc/flash_sdl.$(OBJEXT)
 	-rm -f drivers/pc/unix-netplay.$(OBJEXT)
 	-rm -f drivers/sexyal/convert.$(OBJEXT)
 	-rm -f drivers/sexyal/drivers/dsound.$(OBJEXT)
@@ -946,13 +941,13 @@ include drivers/common/$(DEPDIR)/scale3x.Po
 include drivers/common/$(DEPDIR)/scalebit.Po
 include drivers/common/$(DEPDIR)/vidblit.Po
 include drivers/pc/$(DEPDIR)/input.Po
-include drivers/pc/$(DEPDIR)/main.Po
+include drivers/pc/$(DEPDIR)/flash_main.Po
 include drivers/pc/$(DEPDIR)/sdl-joystick.Po
 include drivers/pc/$(DEPDIR)/sdl-opengl.Po
 include drivers/pc/$(DEPDIR)/sdl-sound.Po
 include drivers/pc/$(DEPDIR)/sdl-throttle.Po
 include drivers/pc/$(DEPDIR)/sdl-video.Po
-include drivers/pc/$(DEPDIR)/sdl.Po
+include drivers/pc/$(DEPDIR)/flash_sdl.Po
 include drivers/pc/$(DEPDIR)/unix-netplay.Po
 include drivers/sexyal/$(DEPDIR)/convert.Po
 include drivers/sexyal/$(DEPDIR)/md5.Po
@@ -2746,29 +2741,29 @@ drivers/pc/input.obj: drivers/pc/input.c
 	$(CCDEPMODE) $(depcomp) \
 	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/input.obj `cygpath -w drivers/pc/input.c`
 
-drivers/pc/main.o: drivers/pc/main.c
-	source='drivers/pc/main.c' object='drivers/pc/main.o' libtool=no \
-	depfile='drivers/pc/$(DEPDIR)/main.Po' tmpdepfile='drivers/pc/$(DEPDIR)/main.TPo' \
+drivers/pc/flash_main.o: drivers/pc/flash_main.c
+	source='drivers/pc/flash_main.c' object='drivers/pc/flash_main.o' libtool=no \
+	depfile='drivers/pc/$(DEPDIR)/flash_main.Po' tmpdepfile='drivers/pc/$(DEPDIR)/flash_main.TPo' \
 	$(CCDEPMODE) $(depcomp) \
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/main.o `test -f 'drivers/pc/main.c' || echo '$(srcdir)/'`drivers/pc/main.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/flash_main.o `test -f 'drivers/pc/flash_main.c' || echo '$(srcdir)/'`drivers/pc/flash_main.c
 
-drivers/pc/main.obj: drivers/pc/main.c
-	source='drivers/pc/main.c' object='drivers/pc/main.obj' libtool=no \
-	depfile='drivers/pc/$(DEPDIR)/main.Po' tmpdepfile='drivers/pc/$(DEPDIR)/main.TPo' \
+drivers/pc/flash_main.obj: drivers/pc/flash_main.c
+	source='drivers/pc/flash_main.c' object='drivers/pc/flash_main.obj' libtool=no \
+	depfile='drivers/pc/$(DEPDIR)/flash_main.Po' tmpdepfile='drivers/pc/$(DEPDIR)/flash_main.TPo' \
 	$(CCDEPMODE) $(depcomp) \
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/main.obj `cygpath -w drivers/pc/main.c`
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/flash_main.obj `cygpath -w drivers/pc/flash_main.c`
 
-drivers/pc/sdl.o: drivers/pc/sdl.c
-	source='drivers/pc/sdl.c' object='drivers/pc/sdl.o' libtool=no \
-	depfile='drivers/pc/$(DEPDIR)/sdl.Po' tmpdepfile='drivers/pc/$(DEPDIR)/sdl.TPo' \
+drivers/pc/flash_sdl.o: drivers/pc/flash_sdl.c
+	source='drivers/pc/flash_sdl.c' object='drivers/pc/flash_sdl.o' libtool=no \
+	depfile='drivers/pc/$(DEPDIR)/flash_sdl.Po' tmpdepfile='drivers/pc/$(DEPDIR)/flash_sdl.TPo' \
 	$(CCDEPMODE) $(depcomp) \
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/sdl.o `test -f 'drivers/pc/sdl.c' || echo '$(srcdir)/'`drivers/pc/sdl.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/flash_sdl.o `test -f 'drivers/pc/flash_sdl.c' || echo '$(srcdir)/'`drivers/pc/flash_sdl.c
 
-drivers/pc/sdl.obj: drivers/pc/sdl.c
-	source='drivers/pc/sdl.c' object='drivers/pc/sdl.obj' libtool=no \
-	depfile='drivers/pc/$(DEPDIR)/sdl.Po' tmpdepfile='drivers/pc/$(DEPDIR)/sdl.TPo' \
+drivers/pc/flash_sdl.obj: drivers/pc/flash_sdl.c
+	source='drivers/pc/flash_sdl.c' object='drivers/pc/flash_sdl.obj' libtool=no \
+	depfile='drivers/pc/$(DEPDIR)/flash_sdl.Po' tmpdepfile='drivers/pc/$(DEPDIR)/flash_sdl.TPo' \
 	$(CCDEPMODE) $(depcomp) \
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/sdl.obj `cygpath -w drivers/pc/sdl.c`
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o drivers/pc/flash_sdl.obj `cygpath -w drivers/pc/flash_sdl.c`
 
 drivers/pc/sdl-joystick.o: drivers/pc/sdl-joystick.c
 	source='drivers/pc/sdl-joystick.c' object='drivers/pc/sdl-joystick.o' libtool=no \

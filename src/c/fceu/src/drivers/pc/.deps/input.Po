@@ -1,4 +1,4 @@
-drivers/pc/input.o 22347.achacks.o: drivers/pc/input.c \
+drivers/pc/input.o 79932.achacks.o: drivers/pc/input.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/string.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/cdefs.h \
@@ -6,7 +6,10 @@ drivers/pc/input.o 22347.achacks.o: drivers/pc/input.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_types.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/machine/_types.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h \
-  drivers/pc/main.h drivers/pc/../../driver.h \
+  drivers/pc/flash_main.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/AS3.h \
+  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
+  drivers/pc/../../driver.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdio.h \
   drivers/pc/../../types.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
@@ -32,7 +35,6 @@ drivers/pc/input.o 22347.achacks.o: drivers/pc/input.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_sigset.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h \
-  /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stddef.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/ctype.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/_ctype.h \
@@ -149,7 +151,11 @@ drivers/pc/input.o 22347.achacks.o: drivers/pc/input.c \
 
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/strings.h:
 
-drivers/pc/main.h:
+drivers/pc/flash_main.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/AS3.h:
+
+/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h:
 
 drivers/pc/../../driver.h:
 
@@ -212,8 +218,6 @@ drivers/pc/keyscan.h:
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/_timeval.h:
 
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/sys/timespec.h:
-
-/Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stdlib.h:
 
 /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/stddef.h:
 

@@ -1,4 +1,4 @@
-mappers/76.o 16430.achacks.o: mappers/76.c \
+mappers/76.o 74012.achacks.o: mappers/76.c \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/avm2/AVM2Env.h mappers/mapinc.h \
   mappers/../types.h \
   /Users/edmcmanus/alchemy/v0.5/avm2-libc/include/inttypes.h \
