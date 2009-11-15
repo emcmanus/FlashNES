@@ -1,9 +1,9 @@
 package sdl {
 	
-	import cmodule.sdlApplication.CLibInit;
+	import cmodule.libNES.CLibInit;
 	
 	import flash.display.DisplayObject;
-	import flash.display.PixelSnapping;
+	import flash.utils.ByteArray;
 	
 	import sdl.events.ListenerManager;
 	import sdl.video.VideoSurface;
@@ -44,7 +44,7 @@ package sdl {
 		 * 
 		 * <p>If your application requires some special initialization process, add it here.</p>
 		 */
-		public function SDLApplication( romData ) {
+		public function SDLApplication( romData:ByteArray ) {
 			this.cLoader = new CLibInit();
 			
 			this.cLoader.putEnv("SDL_VIDEODRIVER", "flash");
