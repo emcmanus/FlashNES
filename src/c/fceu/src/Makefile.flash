@@ -45,7 +45,7 @@ OBJECTS += drivers/pc/input.o drivers/pc/sdl-joystick.o drivers/pc/sdl-sound.o d
 # Targets
 
 all: $(OBJECTS)
-	$(CC) $(INCLUDES) $(LIBS) $(OBJECTS) -lm -swc -dirty -O2 -o libNES.swc
+	$(CC) $(INCLUDES) $(LIBS) $(OBJECTS) -lm -swc -O2 -o libNES.swc
 	growlnotify -m "LibNES Build Complete"
 
 

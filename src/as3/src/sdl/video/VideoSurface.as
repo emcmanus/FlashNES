@@ -28,7 +28,7 @@ package sdl.video {
 		public function VideoSurface( sdlApplication:SDLApplication, width:int, height:int ) {
 			
 			// Init
-			var ram_NS:Namespace = new Namespace("cmodule.sdlApplication");
+			var ram_NS:Namespace = new Namespace("cmodule.libNES");
 			this.domainMemory = (ram_NS::gstate).ds;
 			this.videoSurfaceData = new BitmapData( width, height, false, 0x0 );
 			this.screenRectangle = new Rectangle( 0, 0, width, height );

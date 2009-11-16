@@ -7,6 +7,8 @@ package {
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
 	
+	import utils.FPSCounter;
+	
 	import sdl.SDLApplication;
 	import sdl.video.VideoSurface;
 	
@@ -54,8 +56,8 @@ package {
 			sdlApplication.setEventTarget( surfaceContainer );
 			
 			// Monitor FPS performance
-//			var fps:FPSCounter = new FPSCounter();
-//			addChild(fps);
+			var fps:FPSCounter = new FPSCounter();
+			addChild(fps);
 		}
 		
 		

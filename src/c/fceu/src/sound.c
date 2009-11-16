@@ -882,6 +882,13 @@ int FlushEmulateSound(void)
 
   if(!timestamp) return(0);
 
+  // Tmp Flash hack until we enable sound
+  #ifdef FLASH
+	left = 0;
+	end = 0;
+	goto nosoundo;
+  #endif
+  
   if(!FSettings.SndRate)
   {
    left=0;
@@ -928,8 +935,9 @@ int FlushEmulateSound(void)
     Wave[0]=Wave[(end>>4)];
    Wave[end>>4]=0;
   }
+  
   nosoundo:
-
+  
   if(FSettings.soundq>=1)
   {
    soundtsoffs=left;

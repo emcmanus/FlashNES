@@ -140,7 +140,7 @@ AS3_Val FLASH_setup_sdl()
 
 
 AS3_Val FLASH_tick(void *data, AS3_Val args)
-{
+{	
 	DoFun();
 	
 	return AS3_Int(0);
@@ -148,7 +148,7 @@ AS3_Val FLASH_tick(void *data, AS3_Val args)
 
 
 AS3_Val FLASH_quitApplication(void *data, AS3_Val args)
-{
+{	
 	// Old CLIMain:
 	SaveConfig();
 	FCEUI_Kill();

@@ -28,7 +28,7 @@
 #include "sdl.h"
 #endif
 
-#ifdef USE_SEXYAL
+#if USE_SEXYAL
 
 #include "../sexyal/sexyal.h"
 
@@ -227,7 +227,9 @@ void KillSound(void)
  } 
 }
 
-#else	/* So we'll use SDL's evil sound support.  Ok. */
+#elif !defined(FLASH)	// LATER, REMOVE THIS!
+
+/* So we'll use SDL's evil sound support.  Ok. */
 static volatile int *Buffer = 0;
 static unsigned int BufferSize;
 static unsigned int BufferRead;
@@ -340,6 +342,32 @@ void KillSound(void)
  }
 }
 
+
+#else
+
+// No sound support -- expose stubs
+
+int InitSound(FCEUGI *gi)
+{
+	#ifdef FLASH
+	FCEUD_Message("FCEU BUILT WITHOUT SOUND SUPPORT (FLASH BUILD).");
+	#endif
+	return 1;
+}
+void WriteSound(int32 *Buffer, int Count){}
+int KillSound(void)
+{
+	return 1;
+}
+uint32 GetMaxSound(void)
+{
+	return 0;
+}
+uint32 GetWriteSound(void)
+{
+	return 0;
+}
+void SilenceSound(int s) {}
 
 #endif
 

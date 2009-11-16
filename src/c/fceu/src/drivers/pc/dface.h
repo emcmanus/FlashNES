@@ -64,7 +64,10 @@ void ButtonConfigEnd(void);
 void Giggles(int);
 void DoFun(void);
 
+#if NETWORK
 int FCEUD_NetworkConnect(void);
+#endif
+
 #ifdef  __cplusplus
 }
 #endif

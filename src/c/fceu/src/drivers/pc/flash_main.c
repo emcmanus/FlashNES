@@ -278,7 +278,10 @@ int LoadGame(const char *path)
 	if(eoptions&EO_AUTOHIDE) GUI_Hide(1);
 #endif
 	
+#if NETWORK
 	FCEUD_NetworkConnect();
+#endif
+	
 	return 1;
 }
 
@@ -417,7 +420,6 @@ void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count)
 #if NETWORK
 	extern int FCEUDnetplay;
 #endif
-	
 	//Count = 0;
 	if(Count)
 	{
@@ -434,6 +436,7 @@ void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count)
 		
 		//if(uflow) puts("Underflow");
 		tmpcan = GetWriteSound();
+		
 		if((tmpcan < Count*0.90) && !uflow)
 		{
 			if(XBuf && (inited&4) && !(NoWaiting & 2))
@@ -462,12 +465,12 @@ void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count)
 			}
 		}
 #endif
-		
 	}
 	else
 	{
 		if(!NoWaiting && !(eoptions&EO_NOTHROTTLE))
 			SpeedThrottle();
+		
 		if(XBuf && (inited&4))
 		{
 			BlitScreen(XBuf);
