@@ -88,6 +88,16 @@ Due to missing definitions, I split up the setup function into two sub-routines:
 
 Ok, we're building again! 
 
+Updated the AS3 application to pull in the new SWC. On building, discovered there are a few null pointers. The first related to SDL_init, did I miss a header or extern definition?
+
+The null pointers appear to be because we're not properly linking against libz and libSDL. NEXT STEP: move libSDL.a and libz.a into the src directory. Maybe alchemy is having some sort of path problem.
+
+I'm going to guess it's an issue with our Makefile. Automake spit out a ton of code, alot of which we don't need and is just clutter around the build parameters. Stripping out unneccesary options from Makefile.flash. Done, built a much simplified Makefile (currently Makefile.flash4).
+
+The linking isses are because our libraries were compiled as native object code, when LLVM needs them as LLVM bitcode. Going back now and re-building dependencies with the -emit-llvm flag.
+
+
+
 
 
 
