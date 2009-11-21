@@ -63,9 +63,9 @@ uint8 FCEU_GetJoyJoy(void)
 }
 extern uint8 coinon;
 
-static int FSDisable=0;	/* Set to 1 if NES-style four-player adapter is disabled. */
-static int JPAttrib[2]={0,0};
-static int JPType[2]={0,0};
+static int FSDisable=0;	// Disable Four Score -- Set to 1 if NES-style four-player adapter is disabled.
+static int JPAttrib[2]={0,0};	// joystick-port-attribute?
+static int JPType[2]={0,0};	// joystick-port-type?
 static void *InputDataPtr[2];
 
 static int JPAttribFC=0;
@@ -94,26 +94,37 @@ static uint8 FP_FASTAPASS(1) ReadGPVS(int w)
                 return ret;
 }
 
-static uint8 FP_FASTAPASS(1) ReadGP(int w)
+static uint8 FP_FASTAPASS(1) ReadGP(int w)	// Read gamepad?
 {
-                uint8 ret;
+	uint8 ret;
 
-                if(joy_readbit[w]>=8)
-                 ret = ((joy[2+w]>>(joy_readbit[w]&7))&1);
-                else
-                 ret = ((joy[w]>>(joy_readbit[w]))&1);
-                if(joy_readbit[w]>=16) ret=0;
-                if(FSDisable)
-		{
-	  	 if(joy_readbit[w]>=8) ret|=1;
-		}
-		else
-		{
-                 if(joy_readbit[w]==19-w) ret|=1;
-		}
-		if(!fceuindbg)
-		 joy_readbit[w]++;
-                return ret;
+	if(joy_readbit[w]>=8)
+	{
+		ret = ((joy[2+w]>>(joy_readbit[w]&7))&1);
+	}
+	else
+	{
+		ret = ((joy[w]>>(joy_readbit[w]))&1);
+	}
+	
+	if(joy_readbit[w]>=16)
+		ret=0;
+	
+	if(FSDisable)
+	{
+		if(joy_readbit[w]>=8)
+			ret|=1;
+	}
+	else
+	{
+		if(joy_readbit[w]==19-w)
+			ret|=1;
+	}
+	
+	if(!fceuindbg)
+		joy_readbit[w]++;
+	
+	return ret;
 }
 
 static DECLFR(JPRead)
@@ -165,7 +176,7 @@ static void FP_FASTAPASS(1) StrobeGP(int w)
 	joy_readbit[w]=0;
 }
 
-static INPUTC GPC={ReadGP,0,StrobeGP,0,0,0};
+static INPUTC GPC={ReadGP,0,StrobeGP,0,0,0};	// read gamepad, strobe gamepad
 static INPUTC GPCVS={ReadGPVS,0,StrobeGP,0,0,0};
 
 void FCEU_DrawInput(uint8 *buf)
@@ -206,81 +217,131 @@ void FCEU_UpdateInput(void)
 		break;
 	 }
 	}
+	
 	if(FCExp)
-	 if(FCExp->Update)
-	  FCExp->Update(InputDataPtrFC,JPAttribFC);
+	{
+		if(FCExp->Update)
+		{
+			FCExp->Update(InputDataPtrFC,JPAttribFC);
+		}
+	}
 
-        if(FCEUGameInfo->type==GIT_VSUNI)
-	 if(coinon) coinon--;
+    if(FCEUGameInfo->type == GIT_VSUNI)
+	{
+		if(coinon)
+			coinon--;
+	}
 
-        if(FCEUnetplay) NetplayUpdate(joy);
+    if(FCEUnetplay)
+	{
+		NetplayUpdate(joy);
+	}
+	
 	FCEUMOV_AddJoy(joy);
 
-        if(FCEUGameInfo->type==GIT_VSUNI)
-	 FCEU_VSUniSwap(&joy[0],&joy[1]);
+	if(FCEUGameInfo->type==GIT_VSUNI)
+	{
+		FCEU_VSUniSwap(&joy[0],&joy[1]);
+	}
 }
 
 static DECLFR(VSUNIRead0)
 { 
-        uint8 ret=0; 
-  
-        if(JPorts[0]->Read)   
-         ret|=(JPorts[0]->Read(0))&1;
- 
-        ret|=(vsdip&3)<<3;
-        if(coinon)
-         ret|=0x4;
-        return ret;
+	uint8 ret=0; 
+
+	if(JPorts[0]->Read)   
+	{
+		ret|=(JPorts[0]->Read(0))&1;
+	}
+
+	ret |= (vsdip & 3)<<3;
+
+	if(coinon)
+	{
+		ret|=0x4;
+	}
+
+	return ret;
 }
  
 static DECLFR(VSUNIRead1)
 {
-        uint8 ret=0;
- 
-        if(JPorts[1]->Read)
-         ret|=(JPorts[1]->Read(1))&1;
-        ret|=vsdip&0xFC;   
-        return ret;
-} 
+	uint8 ret=0;
+	
+	if(JPorts[1]->Read)
+	{
+		ret |= (JPorts[1]->Read(1)) & 1;
+	}
+	
+	ret |= vsdip & 0xFC;   
+	return ret;
+}
 
 static void SLHLHook(uint8 *bg, uint8 *spr, uint32 linets, int final)
 {
- int x;
+	int x;
+	
+ 	for(x=0; x<2; x++)
+	{
+		if(JPorts[x]->SLHook)
+		{
+			JPorts[x]->SLHook(x,bg,spr,linets,final);
+		}
+	}
 
- for(x=0;x<2;x++)
-  if(JPorts[x]->SLHook)
-   JPorts[x]->SLHook(x,bg,spr,linets,final);
- if(FCExp) 
-  if(FCExp->SLHook)
-   FCExp->SLHook(bg,spr,linets,final);
+	if(FCExp)
+	{
+		if(FCExp->SLHook)
+		{
+			FCExp->SLHook(bg,spr,linets,final);
+		}
+	}
 }
 
 static void CheckSLHook(void)
 {
         InputScanlineHook=0;
-        if(JPorts[0]->SLHook || JPorts[1]->SLHook)
-         InputScanlineHook=SLHLHook;
+        
+		if(JPorts[0]->SLHook || JPorts[1]->SLHook)
+		{
+			InputScanlineHook=SLHLHook;
+		}
+		
         if(FCExp)
-         if(FCExp->SLHook)
-          InputScanlineHook=SLHLHook;
+		{
+			if(FCExp->SLHook)
+			{
+				InputScanlineHook=SLHLHook;
+			}
+		}
 }
 
 static void FASTAPASS(1) SetInputStuff(int x)
 {
  	 switch(JPType[x])
 	 {
-	  case SI_GAMEPAD:
-           if(FCEUGameInfo->type==GIT_VSUNI)
-	    JPorts[x] = &GPCVS;
-	   else
-	    JPorts[x]=&GPC;
-	  break;
-	  case SI_ARKANOID:JPorts[x]=FCEU_InitArkanoid(x);break;
-	  case SI_ZAPPER:JPorts[x]=FCEU_InitZapper(x);break;
-          case SI_POWERPADA:JPorts[x]=FCEU_InitPowerpadA(x);break;
-	  case SI_POWERPADB:JPorts[x]=FCEU_InitPowerpadB(x);break;
-	  case SI_NONE:JPorts[x]=&DummyJPort;break;
-         }
+		 case SI_GAMEPAD:
+				if(FCEUGameInfo->type == GIT_VSUNI)
+		    		JPorts[x] = &GPCVS;
+				else
+					JPorts[x]=&GPC;	// Gamepad config?
+		  		break;
+		  case SI_ARKANOID:
+				JPorts[x]=FCEU_InitArkanoid(x);
+				break;
+		  case SI_ZAPPER:
+				JPorts[x]=FCEU_InitZapper(x);
+				break;
+	      case SI_POWERPADA:
+				JPorts[x]=FCEU_InitPowerpadA(x);
+				break;
+		  case SI_POWERPADB:
+				JPorts[x]=FCEU_InitPowerpadB(x);
+				break;
+		  case SI_NONE:
+				JPorts[x]=&DummyJPort;
+				break;
+    }
 
 	CheckSLHook();
 }
@@ -345,6 +406,8 @@ void InitializeInput(void)
 	SetInputStuffFC();
 }
 
+
+// Update local pointers. ptr points to a bit-vector listing button states (up/down)
 void FCEUI_SetInput(int port, int type, void *ptr, int attrib)
 {
  JPAttrib[port]=attrib;
@@ -358,11 +421,12 @@ void FCEUI_DisableFourScore(int s)
  FSDisable=s;
 }
 
+// V. Similar to FCEUI_SetInput
 void FCEUI_SetInputFC(int type, void *ptr, int attrib)
 {
  JPAttribFC=attrib;
  JPTypeFC=type;
- InputDataPtrFC=ptr;
+ InputDataPtrFC=ptr; // Pointer to array of key states (from the driver's input.c)
  SetInputStuffFC();
 }
 

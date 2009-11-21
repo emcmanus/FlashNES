@@ -96,7 +96,7 @@ I'm going to guess it's an issue with our Makefile. Automake spit out a ton of c
 
 The linking isses are because our libraries were compiled as native object code, when LLVM needs them as LLVM bitcode. Going back now and re-building dependencies with the -emit-llvm flag.
 
-
+Now we're having color depth issues. Rather than just upcast to 24bpp I'll try to get FCEU started with the right depth. For some reason I can't simply set that property in the settings, so I have to trace through the code. Added another conditional in sdl-video.c that forces color depth ifdef flash.
 
 
 

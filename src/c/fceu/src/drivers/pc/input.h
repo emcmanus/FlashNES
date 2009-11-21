@@ -13,6 +13,8 @@ extern CFGSTRUCT InputConfig[];
 extern ARGPSTRUCT InputArgs[];
 void ParseGIInput(FCEUGI *GI);
 
+void ConfigDevice(int which, int arg);
+
 #define BUTTC_KEYBOARD          0x00
 #define BUTTC_JOYSTICK          0x01
 #define BUTTC_MOUSE             0x02

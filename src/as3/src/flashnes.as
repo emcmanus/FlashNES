@@ -48,6 +48,9 @@ package {
 			this.sdlApplication = new SDLApplication( romLoader.data as ByteArray );
 			this.surface = sdlApplication.getSurface( 256, 224 );
 			
+			surface.scaleX = 2;
+			surface.scaleY = 2;
+			
 			// Build container for input events
 			surfaceContainer = new Sprite();
 			surfaceContainer.addChild( surface );

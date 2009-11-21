@@ -7,12 +7,12 @@
  *
  */
 
-#include "AS3.h"
-#include "flash_sdl.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "AS3.h"
+#include "flash_sdl.h"
 
 #include "sdl-video.h"
 #if NETWORK
@@ -22,6 +22,7 @@
 #include "throttle.h"
 #include "input.h"
 #include "dface.h"
+
 
 
 DSETTINGS Settings;
@@ -67,8 +68,9 @@ ARGPSTRUCT DriverArgs[]={
 // Settings, Args
 static void SetDefaults(void)
 {
+	// Most of this gets overridden in our call to set SDL video mode
 	Settings.special=Settings.specialfs=0;
-	_bpp=8;
+	_bpp=16;
 	_xres=640;
 	_yres=480;
 	_fullscreen=0;
@@ -166,12 +168,15 @@ AS3_Val FLASH_getDisplayPointer(void *data, AS3_Val args)
 }
 
 
+// This is defined in SDL -- It's an AS3 reference to the event manager in the actionscript wrapper
+extern AS3_Val FLASH_EVENT_MANAGER_OBJECT;
 AS3_Val FLASH_setEventManager( void *data, AS3_Val args )
 {
-//	AS3_Val eventManager;
-//	AS3_ArrayValue( args, "AS3ValType", &eventManager );
+	AS3_Val eventManager;
+	AS3_ArrayValue( args, "AS3ValType", &eventManager );
 
-//	FLASH_EVENT_MANAGER_OBJECT = eventManager;
+	FLASH_EVENT_MANAGER_OBJECT = eventManager;
+	
 	return AS3_Int(0);
 }
 
@@ -221,7 +226,7 @@ void UpdatePhysicalInput(void)
 	{
 		switch(event.type)
 		{
-			case SDL_QUIT: CloseGame();puts("Quit");break;
+			case SDL_QUIT: CloseGame(); puts("Quit"); break;
 		}
 	}
 	//SDL_PumpEvents();
@@ -243,20 +248,22 @@ uint8 *GetBaseDirectory(void)
 }
 
 
-// Joystick
+// Button press test (given a button struct, is that key currently being pressed?)
 
 int DTestButton(ButtConfig *bc)
 {
 	int x;
 	
-	for(x=0;x<bc->NumC;x++)
+	for(x=0; x < bc->NumC; x++)	// Cycle through available controllers
 	{
-		if(bc->ButtType[x]==BUTTC_KEYBOARD)
+		if(bc->ButtType[x]==BUTTC_KEYBOARD)	// Keyboard event
 		{
 			if(KeyState[bc->ButtonNum[x]])
+			{
 				return(1);
+			}
 		}
-		else if(bc->ButtType[x]==BUTTC_JOYSTICK)
+		else if(bc->ButtType[x]==BUTTC_JOYSTICK) 	// Joystick event
 		{
 			if(DTestButtonJoy(bc))
 				return(1);

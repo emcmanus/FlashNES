@@ -33,38 +33,50 @@
 /* UsrInputType[] is user-specified.  InputType[] is current
         (game loading can override user settings)
 */
-int UsrInputType[3]={SI_GAMEPAD,SI_GAMEPAD,SIFC_NONE};
-int InputType[3];
+int UsrInputType[3] = {SI_GAMEPAD, SI_GAMEPAD, SIFC_NONE};
+int InputType[3];	// What type of controller to use, the third value is set for certain games to alter input
 static int cspec;
    
 int gametype;
 
-/* Necessary for proper GUI functioning(configuring when a game isn't loaded). */
+
+// Necessary for proper GUI functioning(configuring when a game isn't loaded).
+
 void InputUserActiveFix(void)
 {
- int x;
- for(x=0;x<3;x++) InputType[x]=UsrInputType[x];
+	int x;
+	
+	for(x=0;x<3;x++)
+	{
+		InputType[x]=UsrInputType[x];
+	}
 }
+
+
+// Set control type (power pad, gamepad, etc.)
 
 void ParseGIInput(FCEUGI *gi)
 {
- gametype=gi->type;
- 
- InputType[0]=UsrInputType[0];
- InputType[1]=UsrInputType[1];
- InputType[2]=UsrInputType[2];
- 
- if(gi->input[0]>=0)
-  InputType[0]=gi->input[0];
- if(gi->input[1]>=0)
-  InputType[1]=gi->input[1];
- if(gi->inputfc>=0)
-  InputType[2]=gi->inputfc;
- cspec = gi->cspecial;
+	gametype=gi->type;	// FCEUGI *gi comes from the call to FCEUI_LoadGame -- if it sets a controller type it'll override the user's prefs
 
- #ifdef EXTGUI
- Giggles(gi->cspecial);
- #endif
+	InputType[0]=UsrInputType[0];
+	InputType[1]=UsrInputType[1];
+	InputType[2]=UsrInputType[2];
+	
+	// Input type specified by the ROM will override user choice
+	
+	if(gi->input[0]>=0)
+		InputType[0]=gi->input[0];
+	if(gi->input[1]>=0)
+		InputType[1]=gi->input[1];
+	if(gi->inputfc>=0)
+		InputType[2]=gi->inputfc;
+	
+	cspec = gi->cspecial;
+	
+	#ifdef EXTGUI
+		Giggles(gi->cspecial);
+	#endif
 }
 
 
@@ -137,7 +149,7 @@ static void KeyboardCommands(void)
 
   keys=GetKeyboard(); 
 
-  if(InputType[2]==SIFC_FKB)
+  if(InputType[2]==SIFC_FKB)	// Family Keyboard (FKB)
   {
    if(keyonly(SCROLLLOCK)) 
    {
@@ -145,7 +157,7 @@ static void KeyboardCommands(void)
     FCEUI_DispMessage("Family Keyboard %sabled.",cidisabled?"en":"dis");
    }
    #ifdef SDL
-   SDL_WM_GrabInput(cidisabled?SDL_GRAB_ON:SDL_GRAB_OFF);
+   	SDL_WM_GrabInput( cidisabled? SDL_GRAB_ON: SDL_GRAB_OFF );
    #endif
    if(cidisabled) return;
   }
@@ -153,46 +165,61 @@ static void KeyboardCommands(void)
   is_shift = KEY(LEFTSHIFT) | KEY(RIGHTSHIFT);
   is_alt = KEY(LEFTALT) | KEY(RIGHTALT);
 
-  if(keyonly(F4))
-  {
-   if(is_shift) FCEUI_SetRenderDisable(-1, 2);
-   else FCEUI_SetRenderDisable(2, -1);
-  }
-  #ifdef SDL
-  if(keyonly(ENTER) && is_alt) ToggleFS();
-  #endif
+	if(keyonly(F4))
+	{
+		if(is_shift)
+			FCEUI_SetRenderDisable(-1, 2);
+		else
+			FCEUI_SetRenderDisable(2, -1);
+	}
+	
+	#if defined(SDL) && !defined(FLASH)
+		if(keyonly(ENTER) && is_alt) ToggleFS();
+	#endif
 
-  NoWaiting&=~1;
-  if(KEY(GRAVE))
-   NoWaiting|=1;
+	NoWaiting &=~ 1;
+	
+	if(KEY(GRAVE))
+	{
+		NoWaiting|=1;
+	}
 
-  if(gametype==GIT_FDS)
-  {
-   if(keyonly(F6)) FCEUI_FDSSelect();
-   if(keyonly(F8)) FCEUI_FDSInsert(0);
-  }
+	if(gametype==GIT_FDS)
+	{
+		if(keyonly(F6)) FCEUI_FDSSelect();
+		if(keyonly(F8)) FCEUI_FDSInsert(0);
+	}
+	
+	if(keyonly(F9))
+	{
+		FCEUI_SaveSnapshot();
+	}
 
-  if(keyonly(F9)) FCEUI_SaveSnapshot();
-  if(gametype!=GIT_NSF)
-  {
-   #ifndef EXTGUI
-   if(keyonly(F2)) DoCheatSeq();
-   #endif
-   if(keyonly(F5)) 
-   {
-    if(is_shift)
-     FCEUI_SaveMovie(NULL);
-    else
-     FCEUI_SaveState(NULL);
-   }
-   if(keyonly(F7)) 
-   {
-    if(is_shift)
-     FCEUI_LoadMovie(NULL);
-    else
-     FCEUI_LoadState(NULL);
-   }
-  }
+	if(gametype!=GIT_NSF)
+	{
+		#ifndef EXTGUI
+		if(keyonly(F2))
+		{
+			DoCheatSeq();
+		}
+		#endif
+		
+		if(keyonly(F5)) 
+		{
+			if(is_shift)
+				FCEUI_SaveMovie(NULL);
+			else
+				FCEUI_SaveState(NULL);
+		}
+		
+		if(keyonly(F7)) 
+		{
+			if(is_shift)
+				FCEUI_LoadMovie(NULL);
+			else
+				FCEUI_LoadState(NULL);
+		}
+	}
 
   if(keyonly(F1)) FCEUI_ToggleTileView();
 
@@ -278,8 +305,8 @@ static void KeyboardCommands(void)
  }
 }
 
-#define MK(x)   {{BUTTC_KEYBOARD},{0},{MKK(x)},1}
-#define MK2(x1,x2)	{{BUTTC_KEYBOARD},{0},{MKK(x1),MKK(x2)},2}
+#define MK(x)   {{BUTTC_KEYBOARD},{0},{MKK(x)},1}					// Make key obj, 1 player?
+#define MK2(x1,x2)	{{BUTTC_KEYBOARD},{0},{MKK(x1),MKK(x2)},2}		// Make key obj, 2 players?
 
 #define MKZ()   {{0},{0},{0},0}
 
@@ -288,8 +315,10 @@ static void KeyboardCommands(void)
 ButtConfig GamePadConfig[4][10]={
         /* Gamepad 1 */
         { 
-	 MK(KP3), MK(KP2), MK(TAB), MK(ENTER), MK(W),MK(Z),
-                MK(A), MK(S), MKZ(), MKZ()
+//	MK(KP3), MK(KP2), MK(TAB), MK(ENTER), MK(W), MK(Z),
+//				MK(A), MK(S), MKZ(), MKZ()
+	 MK(O), MK(P), MK(TAB), MK(ENTER), MK(W), MK(S),		// b, a, select, start, up, down, left, right, n/a, n/a
+                MK(A), MK(D), MKZ(), MKZ()
 	},
 
         /* Gamepad 2 */
@@ -305,62 +334,82 @@ ButtConfig GamePadConfig[4][10]={
 
 static void UpdateGamepad(void)
 {
- static int rapid=0;
- uint32 JS=0;
- int x;
- int wg;
-
- rapid^=1;
-
- for(wg=0;wg<4;wg++)
- {
-  for(x=0;x<8;x++)
-   if(DTestButton(&GamePadConfig[wg][x]))
-    JS|=(1<<x)<<(wg<<3);
-
-  if(rapid)
-   for(x=0;x<2;x++)
-     if(DTestButton(&GamePadConfig[wg][8+x]))
-      JS|=(1<<x)<<(wg<<3);
-  }
-
-  for(x=0;x<32;x+=8)	/* Now, test to see if anything weird(up+down at same time)
-			   is happening, and correct */
-  {
-   if((JS & (0xC0<<x) ) == (0xC0<<x) ) JS&=~(0xC0<<x);
-   if((JS & (0x30<<x) ) == (0x30<<x) ) JS&=~(0x30<<x);
-  }
-
-  JSreturn=JS;
+	static int rapid=0;
+	uint32 JS=0;	// WHAT THE FUCK does js stand for? A bitvector that holds the states of all buttons on all controllers (4 controllers x 8 buttons)
+	int x;
+	int wg;	// WHAT THE FUCK DOES WG STAND FOR?? (I think it stands for "which gamepad." Oh, yeah. That's obvious.)
+	
+	rapid ^= 1;
+	
+	for(wg=0; wg<4; wg++)	// 4 controllers
+	{
+		for(x=0; x<8; x++)	// 8 buttons per controller
+		{
+			if(DTestButton(&GamePadConfig[wg][x]))	// Test each button on each controller
+			{
+				JS |= (1<<x) << (wg<<3);	// A bitvector that holds the states of all buttons on all controllers (4 controllers x 8 buttons)
+			}
+		}
+		
+		if(rapid)
+		{
+			for(x=0; x<2; x++)
+			{
+				if(DTestButton(&GamePadConfig[wg][8+x]))
+				{
+					JS |= (1<<x) << (wg<<3);
+				}
+			}
+		}
+	}
+	
+	for(x=0; x<32; x+=8)	// Test to see if anything weird (up+down at same time) is happening, and correct
+	{
+		if( JS&(0xC0<<x) == 0xC0<<x )
+		{
+			JS &=~ (0xC0<<x);
+		}
+		if( JS&(0x30<<x) == 0x30<<x )
+		{
+			JS &=~ (0x30<<x);
+		}
+	}
+	
+	JSreturn = JS;	// Don't return, just manipulate the global
 }
 
-ButtConfig powerpadsc[2][12]={
-                              {
-                               MK(O),MK(P),MK(BRACKET_LEFT),
-                               MK(BRACKET_RIGHT),MK(K),MK(L),MK(SEMICOLON),
-				MK(APOSTROPHE),
-                               MK(M),MK(COMMA),MK(PERIOD),MK(SLASH)
-                              },
-                              {
-                               MK(O),MK(P),MK(BRACKET_LEFT),
-                               MK(BRACKET_RIGHT),MK(K),MK(L),MK(SEMICOLON),
-                                MK(APOSTROPHE),
-                               MK(M),MK(COMMA),MK(PERIOD),MK(SLASH)
-                              }
-                             };
+ButtConfig powerpadsc[2][12] = 
+{
+	{
+		MK(O),MK(P),MK(BRACKET_LEFT),
+		MK(BRACKET_RIGHT),MK(K),MK(L),MK(SEMICOLON), MK(APOSTROPHE),
+		MK(M),MK(COMMA),MK(PERIOD),MK(SLASH)
+	},
+	{
+		MK(O),MK(P),MK(BRACKET_LEFT),
+		MK(BRACKET_RIGHT),MK(K),MK(L),MK(SEMICOLON),
+		MK(APOSTROPHE),
+		MK(M),MK(COMMA),MK(PERIOD),MK(SLASH)
+	}
+};
 
 static uint32 powerpadbuf[2];
 
-static uint32 UpdatePPadData(int w)
+static uint32 UpdatePPadData(int w)	// Powerpad
 {
- uint32 r=0;
- ButtConfig *ppadtsc=powerpadsc[w];
- int x;
-
- for(x=0;x<12;x++)
-  if(DTestButton(&ppadtsc[x])) r|=1<<x;
-
- return r;
+	uint32 r=0;
+	ButtConfig *ppadtsc=powerpadsc[w];
+	int x;
+	
+	for(x=0; x<12 ;x++)
+	{
+		if(DTestButton(&ppadtsc[x]))
+		{
+			r |= 1<<x;
+		}
+	}
+	
+	return r;
 }
 
 static uint32 MouseData[3];
@@ -406,6 +455,9 @@ void FCEUD_UpdateInput(void)
    GetMouseData(MouseData);
 }
 
+
+// Set up controllers based on their type (zapper, gamepad, etc.)
+// For more info, see setInputFC, which sets the JSreturn variable
 void InitOtherInput(void)
 {
    void *InputDPtr;
@@ -414,27 +466,30 @@ void InitOtherInput(void)
    int x;
    int attrib;
 
-   for(t=0,x=0;x<2;x++)
+   for(t=0,x=0;x<2;x++)	// For both controllers...
    {
     attrib=0;
     InputDPtr=0;
-    switch(InputType[x])
+    switch(InputType[x]) // Switch on controller type
     {
      case SI_POWERPADA:
      case SI_POWERPADB:InputDPtr=&powerpadbuf[x];break;
-     case SI_GAMEPAD:InputDPtr=&JSreturn;break;     
+     case SI_GAMEPAD:
+				InputDPtr=&JSreturn;	// JSreturn is a global that contains a map of keys and their pressed state
+				// DEBUG -- YES, like we want, we hit this for both controllers
+				break;
      case SI_ARKANOID:InputDPtr=MouseData;t|=1;break;
      case SI_ZAPPER:InputDPtr=MouseData;
                                 t|=1;
                                 attrib=1;
                                 break;
     }
-    FCEUI_SetInput(x,InputType[x],InputDPtr,attrib);
+    FCEUI_SetInput(x,InputType[x],InputDPtr,attrib);	// Just updates pointers in Driver's input.c. Example call FCEUI_SetInput(0, SI_GAMEPAD, &JSreturn, 0);
    }
 
    attrib=0;
    InputDPtr=0;
-   switch(InputType[2])
+   switch(InputType[2])	// Switch on game-specific settings
    {
     case SIFC_SHADOW:InputDPtr=MouseData;t|=1;attrib=1;break;
     case SIFC_OEKAKIDS:InputDPtr=MouseData;t|=1;attrib=1;break;
@@ -456,22 +511,24 @@ void InitOtherInput(void)
     InitMouse();
 }
 
-
+// Family Keyboard
 ButtConfig fkbmap[0x48]=
 {
- MK(F1),MK(F2),MK(F3),MK(F4),MK(F5),MK(F6),MK(F7),MK(F8),
- MK(1),MK(2),MK(3),MK(4),MK(5),MK(6),MK(7),MK(8),MK(9),MK(0),
-        MK(MINUS),MK(EQUAL),MK(BACKSLASH),MK(BACKSPACE),
- MK(ESCAPE),MK(Q),MK(W),MK(E),MK(R),MK(T),MK(Y),MK(U),MK(I),MK(O),
-        MK(P),MK(GRAVE),MK(BRACKET_LEFT),MK(ENTER),
- MK(LEFTCONTROL),MK(A),MK(S),MK(D),MK(F),MK(G),MK(H),MK(J),MK(K),
-        MK(L),MK(SEMICOLON),MK(APOSTROPHE),MK(BRACKET_RIGHT),MK(INSERT),
- MK(LEFTSHIFT),MK(Z),MK(X),MK(C),MK(V),MK(B),MK(N),MK(M),MK(COMMA),
-        MK(PERIOD),MK(SLASH),MK(RIGHTALT),MK(RIGHTSHIFT),MK(LEFTALT),MK(SPACE),
- MK(DELETE),MK(END),MK(PAGEDOWN),
- MK(CURSORUP),MK(CURSORLEFT),MK(CURSORRIGHT),MK(CURSORDOWN)
+	MK(F1),MK(F2),MK(F3),MK(F4),MK(F5),MK(F6),MK(F7),MK(F8),
+	MK(1),MK(2),MK(3),MK(4),MK(5),MK(6),MK(7),MK(8),MK(9),MK(0),
+	MK(MINUS),MK(EQUAL),MK(BACKSLASH),MK(BACKSPACE),
+	MK(ESCAPE),MK(Q),MK(W),MK(E),MK(R),MK(T),MK(Y),MK(U),MK(I),MK(O),
+	MK(P),MK(GRAVE),MK(BRACKET_LEFT),MK(ENTER),
+	MK(LEFTCONTROL),MK(A),MK(S),MK(D),MK(F),MK(G),MK(H),MK(J),MK(K),
+	MK(L),MK(SEMICOLON),MK(APOSTROPHE),MK(BRACKET_RIGHT),MK(INSERT),
+	MK(LEFTSHIFT),MK(Z),MK(X),MK(C),MK(V),MK(B),MK(N),MK(M),MK(COMMA),
+	MK(PERIOD),MK(SLASH),MK(RIGHTALT),MK(RIGHTSHIFT),MK(LEFTALT),MK(SPACE),
+	MK(DELETE),MK(END),MK(PAGEDOWN),
+	MK(CURSORUP),MK(CURSORLEFT),MK(CURSORRIGHT),MK(CURSORDOWN)
 };
 
+
+// Iterate over the key map to check for pressed keys
 static void UpdateFKB(void)
 {
  int x;
@@ -575,21 +632,26 @@ static void UpdateFTrainer(void)
  }
 }
 
+// Sub-configure? Reconfigure controllers according to text from the CLI (command line interface)?
 static void subcon(char *text, ButtConfig *bc)
 {
- uint8 buf[256];
- int wc;
+	uint8 buf[256];
+	int wc;	// which controller
 
- for(wc=0;wc<MAXBUTTCONFIG;wc++)
- {
-  sprintf(buf,"%s (%d)",text,wc+1);
-  DWaitButton(buf,bc,wc);
-
-  if(wc && bc->ButtType[wc]==bc->ButtType[wc-1] && bc->DeviceNum[wc]==bc->DeviceNum[wc-1] &&
-                bc->ButtonNum[wc]==bc->ButtonNum[wc-1])   
-         break;
- }
- bc->NumC=wc;
+	for(wc=0; wc<MAXBUTTCONFIG; wc++)
+	{
+		sprintf(buf,"%s (%d)",text,wc+1);
+		DWaitButton(buf, bc, wc);
+		
+		if(wc && bc->ButtType[wc]==bc->ButtType[wc-1] &&
+			bc->DeviceNum[wc]==bc->DeviceNum[wc-1] &&
+	        bc->ButtonNum[wc]==bc->ButtonNum[wc-1]
+		){
+			break;
+		}
+	}
+	
+	bc->NumC = wc;	// translation: "number controller" = "which controller"
 }
 
 void ConfigDevice(int which, int arg)

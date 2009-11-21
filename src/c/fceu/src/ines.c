@@ -133,17 +133,27 @@ struct INPSEL {
 /* This is mostly for my personal use.  So HA. */
 static void SetInput(void)
 {
+	// Default settings for games
+	
  static struct INPSEL moo[]=
 	{
          {0x3a1694f9,SI_GAMEPAD,SI_GAMEPAD,SIFC_4PLAYER},       /* Nekketsu Kakutou Densetsu */
 
 	 {0xc3c0811d,SI_GAMEPAD,SI_GAMEPAD,SIFC_OEKAKIDS},	/* The two "Oeka Kids" games */
 	 {0x9d048ea4,SI_GAMEPAD,SI_GAMEPAD,SIFC_OEKAKIDS},	/*			     */
-
+	
+	// Powerpad Games
 	 {0xaf4010ea,SI_GAMEPAD,SI_POWERPADB,-1},	/* World Class Track Meet */
 	 {0xd74b2719,SI_GAMEPAD,SI_POWERPADB,-1},	/* Super Team Games */
 	 {0x61d86167,SI_GAMEPAD,SI_POWERPADB,-1},	/* Street Cop */
 	 // Bad dump? {0x23040fc4,SI_GAMEPAD,SI_POWERPADB,-1},	    /* Short Order/Eggsplode */
+#if 0
+	// It looks like these games actually require the powerpad so we're not going to disable controller selection for now
+	 {0xaf4010ea,SI_GAMEPAD,SI_GAMEPAD,-1},	/* World Class Track Meet */
+	 {0xd74b2719,SI_GAMEPAD,SI_GAMEPAD,-1},	/* Super Team Games */
+	 {0x61d86167,SI_GAMEPAD,SI_GAMEPAD,-1},	/* Street Cop */
+	 // Bad dump? {0x23040fc4,SI_GAMEPAD,SI_POWERPADB,-1},	    /* Short Order/Eggsplode */
+#endif
 
 
 	 {0x47232739,SI_GAMEPAD,SI_GAMEPAD,SIFC_TOPRIDER},	/* Top Rider */
@@ -153,7 +163,7 @@ static void SetInput(void)
 	 {0x9044550e,SI_GAMEPAD,SI_GAMEPAD,SIFC_FTRAINERA}, /* Rairai Kyonshizu */
 	 {0x2f128512,SI_GAMEPAD,SI_GAMEPAD,SIFC_FTRAINERA}, /* Jogging Race */
 	 {0x60ad090a,SI_GAMEPAD,SI_GAMEPAD,SIFC_FTRAINERA}, /* Athletic World */
-
+	
 	 {0x8a12a7d9,SI_GAMEPAD,SI_GAMEPAD,SIFC_FTRAINERB}, /* Totsugeki Fuuun Takeshi Jou */
 	 {0xea90f3e2,SI_GAMEPAD,SI_GAMEPAD,SIFC_FTRAINERB}, /* Running Stadium */
 	 {0x370ceb65,SI_GAMEPAD,SI_GAMEPAD,SIFC_FTRAINERB}, /* Meiro Dai Sakusen */
@@ -187,7 +197,7 @@ static void SetInput(void)
 	 {0x3e58a87e,-1,SI_ZAPPER,0},  /* Freedom Force */
 	 {0x851eb9be,SI_GAMEPAD,SI_ZAPPER,0},	/* Shooting Range */
 	 {0x74bea652,SI_GAMEPAD,SI_ZAPPER,0},	/* Supergun 3-in-1 */
-	 {0x32fb0583,-1,SI_ARKANOID,0}, /* Arkanoid(NES) */
+	 {0x32fb0583,-1,SI_ARKANOID,0}, /* Arkanoid(NES) */	// SI_ARKANOID basically has the same effect as SI_ZAPPER
 	 {0xd89e5a67,-1,-1,SIFC_ARKANOID}, /* Arkanoid (J) */
 	 {0x0f141525,-1,-1,SIFC_ARKANOID}, /* Arkanoid 2(J) */
 

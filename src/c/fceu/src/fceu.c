@@ -230,72 +230,82 @@ int NSFLoad(FCEUFILE *fp);
 
 FCEUGI *FCEUI_LoadGame(const char *name)
 {
-        FCEUFILE *fp;
+	FCEUFILE *fp;
 	char *ipsfn;
 
-        ResetGameLoaded();
-
+	ResetGameLoaded();
+	
+	// GameInfo declaration
 	FCEUGameInfo = malloc(sizeof(FCEUGI));
-	memset(FCEUGameInfo, 0, sizeof(FCEUGI));
-
+	memset(FCEUGameInfo, 0, sizeof(FCEUGI));	// zero
+	
+	// Defaults (zero)
 	FCEUGameInfo->soundchan = 0;
 	FCEUGameInfo->soundrate = 0;
-        FCEUGameInfo->name=0;
-        FCEUGameInfo->type=GIT_CART;
-        FCEUGameInfo->vidsys=GIV_USER;
-        FCEUGameInfo->input[0]=FCEUGameInfo->input[1]=-1;
-        FCEUGameInfo->inputfc=-1;
-        FCEUGameInfo->cspecial=0;
+	FCEUGameInfo->name=0;
+	FCEUGameInfo->type=GIT_CART;
+	FCEUGameInfo->vidsys=GIV_USER;
+	FCEUGameInfo->input[0]=-1;	// -1 for unknown input
+	FCEUGameInfo->input[1]=-1;	// Both controller ports
+	FCEUGameInfo->inputfc=-1;
+	FCEUGameInfo->cspecial=0;
 
 	FCEU_printf("Loading %s...\n\n",name);
-
-        GetFileBase(name);
-
-	ipsfn=FCEU_MakeFName(FCEUMKF_IPS,0,0);
-	fp=FCEU_fopen(name,ipsfn,"rb",0);
+	
+	GetFileBase(name);
+	
+	// Get file
+	ipsfn = FCEU_MakeFName(FCEUMKF_IPS,0,0);
+	fp = FCEU_fopen(name,ipsfn,"rb",0);
 	free(ipsfn);
-
+	
 	if(!fp)
-        {
- 	 FCEU_PrintError("Error opening \"%s\"!",name);
-	 return 0;
+	{
+		FCEU_PrintError("Error opening \"%s\"!",name);
+		return 0;
 	}
-
-        if(iNESLoad(name,fp))
-         goto endlseq;
-        if(NSFLoad(fp))
-         goto endlseq;
-        if(UNIFLoad(name,fp))
-         goto endlseq;
-        if(FDSLoad(name,fp))
-         goto endlseq;
-
-        FCEU_PrintError("An error occurred while loading the file.");
-        FCEU_fclose(fp);
-        return 0;
-
-        endlseq:
-        FCEU_fclose(fp);
-
-        FCEU_ResetVidSys();
-        if(FCEUGameInfo->type!=GIT_NSF)
-         if(FSettings.GameGenie)
-	  OpenGenie();
-
-        PowerNES();
-	FCEUSS_CheckStates();
-	FCEUMOV_CheckMovies();
-
-        if(FCEUGameInfo->type!=GIT_NSF)
-        {
-         FCEU_LoadGamePalette();
-         FCEU_LoadGameCheats(0);
-        }
-        
-	FCEU_ResetPalette();
-	FCEU_ResetMessages();	// Save state, status messages, etc.
-
-        return(FCEUGameInfo);
+	
+	if(iNESLoad(name,fp))
+		goto endlseq;
+	if(NSFLoad(fp))
+		goto endlseq;
+	if(UNIFLoad(name,fp))
+		goto endlseq;
+	if(FDSLoad(name,fp))
+		goto endlseq;
+	
+	FCEU_PrintError("An error occurred while loading the file.");
+	FCEU_fclose(fp);
+	
+	return 0;	// Error
+	
+	
+	endlseq:	// Load was a success, end sequence
+		FCEU_fclose(fp);
+		FCEU_ResetVidSys();
+		
+		if(FCEUGameInfo->type!=GIT_NSF)
+		{
+			if(FSettings.GameGenie)
+			{
+				OpenGenie();
+			}
+		}
+		
+		PowerNES();
+		FCEUSS_CheckStates();
+		FCEUMOV_CheckMovies();
+		
+		if(FCEUGameInfo->type!=GIT_NSF)
+		{
+			FCEU_LoadGamePalette();
+			FCEU_LoadGameCheats(0);
+		}
+		
+		FCEU_ResetPalette();
+		FCEU_ResetMessages();	// Save state, status messages, etc.
+		
+		return(FCEUGameInfo);
 }
 
 

@@ -2,6 +2,7 @@ package sdl {
 	
 	import cmodule.libNES.CLibInit;
 	
+	import flash.display.StageDisplayState;
 	import flash.display.DisplayObject;
 	import flash.utils.ByteArray;
 	
@@ -11,8 +12,8 @@ package sdl {
 	/**
 	 * This class contans the public interface for an SDL application.
 	 */
-	public class SDLApplication {
-		
+	public class SDLApplication
+	{
 		/** @private */
 		protected var videoSurface:VideoSurface;
 		
@@ -33,7 +34,7 @@ package sdl {
 		internal var cLoader:CLibInit;
 		
 		/**
-		 * Reference to the initialized C application. Contains available C callbacks.
+		 * Reference to the initialized C application. Dictionary of C callbacks.
 		 */
 		public var cLib:Object;
 			
@@ -44,7 +45,8 @@ package sdl {
 		 * 
 		 * <p>If your application requires some special initialization process, add it here.</p>
 		 */
-		public function SDLApplication( romData:ByteArray ) {
+		public function SDLApplication( romData:ByteArray )
+		{
 			this.cLoader = new CLibInit();
 			
 			this.cLoader.putEnv("SDL_VIDEODRIVER", "flash");
@@ -65,15 +67,17 @@ package sdl {
 		 * 
 		 * @return	A bitmap mapped to the SDL Video Surface.
 		 */
-		public function getSurface( width:int=0, height:int=0 ):VideoSurface {
-			if (!videoSurface) {
-				
+		public function getSurface( width:int=0, height:int=0 ):VideoSurface
+		{
+			if (!videoSurface)
+			{
 				this.SDLWidth = width;
 				this.SDLHeight = height;
 				
 				cLib.setup( width, height );
 				videoSurface = new VideoSurface( this, width, height );
 			}
+			
 			return videoSurface;
 		}
 		
@@ -83,10 +87,29 @@ package sdl {
 		 * 
 		 * @param	eventTarget	The display object to register for keypress and mouse events.
 		 */
-		public function setEventTarget( eventTarget:DisplayObject ):void {
-			if (!eventManager){
+		public function setEventTarget( eventTarget:DisplayObject ):void
+		{
+			if (!eventManager)
+			{
 				eventManager = new ListenerManager( eventTarget );
 				cLib.setEventManager( eventManager );	// pass manager reference to c lib for event retrieval
+			}
+		}
+		
+		/**
+		 * Toggle view states (fs/normal)
+		 */
+		public function toggleFullscreen():void {
+			if ( videoSurface.stage )
+			{
+				if ( videoSurface.stage.displayState == StageDisplayState.FULL_SCREEN )
+				{
+					videoSurface.stage.displayState = StageDisplayState.NORMAL;
+				}
+				else
+				{
+					videoSurface.stage.displayState = StageDisplayState.FULL_SCREEN;
+				}
 			}
 		}
 	}

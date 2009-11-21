@@ -64,6 +64,7 @@ int gametype;
 
 FCEUGI *CurGame=NULL;
 
+// FCEUGI *gi comes from the call to loadGame -- if it sets a controller type it'll override the user's prefs
 static void ParseGI(FCEUGI *gi)
 {
 	ParseGIInput(gi);
@@ -73,6 +74,11 @@ static void ParseGI(FCEUGI *gi)
 void FCEUD_PrintError(char *s)
 {
 	AS3_Trace(AS3_String(s));
+}
+
+void FCEUD_MessageInt(int *i)
+{
+	AS3_Trace(AS3_Int(i));
 }
 
 void FCEUD_Message(char *s)
@@ -139,9 +145,8 @@ static void LoadConfig(void)
 {
 	char tdir[2048];
 	sprintf(tdir,"%s"PSS"fceu98.cfg",DrBaseDirectory);
-	FCEUI_GetNTSCTH(&ntsctint, &ntschue);	/* Get default settings if
-											 no config file exists. */
-	LoadFCEUConfig(tdir,fceuconfig);
+	FCEUI_GetNTSCTH(&ntsctint, &ntschue);	/* Get default settings if no config file exists. */
+	LoadFCEUConfig(tdir,fceuconfig);	// Effectively does nothing
 	InputUserActiveFix();
 }
 
@@ -243,7 +248,7 @@ static void DoArgs(int argc, char *argv[])
 	}
 	
 	FCEUI_SetRenderedLines(srendlinev[0],erendlinev[0],srendlinev[1],erendlinev[1]);
-	DoDriverArgs();
+	DoDriverArgs();	// In the Flash driver this does nothing
 }
 
 
@@ -260,6 +265,7 @@ int LoadGame(const char *path)
 	if(!(tmp=FCEUI_LoadGame(path)))
 		return 0;
 	CurGame=tmp;
+	
 	ParseGI(tmp);
 	RefreshThrottleFPS();
 	
@@ -350,6 +356,17 @@ AS3_Val FLASH_setup_main(void *data, AS3_Val args)
 	if(!(ret=FCEUI_Initialize()))
 		return(0);
 	
+	// DEBUG
+	// The next three lines probably aren't necessary, but I'm testing whether they have any side effects that alter the gamepad settings
+	DrBaseDirectory=GetBaseDirectory();
+	FCEUI_SetBaseDirectory(DrBaseDirectory);
+	CreateDirs();
+	
+	
+	LoadConfig();
+	
+	char *fakeArgs[0];	// Fake empty CLI args
+	DoArgs(0, fakeArgs);
 	
 	FCEUI_SetNTSCTH(ntsccol, ntsctint, ntschue);
 	

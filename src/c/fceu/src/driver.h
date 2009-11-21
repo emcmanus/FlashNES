@@ -22,6 +22,10 @@ void FCEUD_GetPalette(uint8 i,uint8 *r, uint8 *g, uint8 *b);
 void FCEUD_PrintError(char *s);
 void FCEUD_Message(char *s);
 
+#ifdef FLASH
+void FCEUD_MessageInt(int *i);
+#endif
+
 #if NETWORK
 /* Network interface */
 

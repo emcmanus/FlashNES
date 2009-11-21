@@ -129,16 +129,16 @@ static void LoadParse(CFGSTRUCT *cfgst, FILE *fp)
 	int x=0;
 
 	while(cfgst[x].ptr)
-        {
-         if(!cfgst[x].name)     // Link to new config structure
-         {
-	  LoadParse((CFGSTRUCT*)cfgst[x].ptr,fp);
-	  x++;
-	  continue;
-         }
-         GetValueR(fp,cfgst[x].name,cfgst[x].ptr,cfgst[x].len);
-         x++;
-        } 
+	{
+		if(!cfgst[x].name)     // Link to new config structure
+		{
+			LoadParse((CFGSTRUCT*)cfgst[x].ptr,fp);
+			x++;
+			continue;
+		}
+		GetValueR(fp,cfgst[x].name,cfgst[x].ptr,cfgst[x].len);
+		x++;
+	} 
 }
 
 void LoadFCEUConfig(char *filename, CFGSTRUCT *cfgst)
@@ -146,7 +146,10 @@ void LoadFCEUConfig(char *filename, CFGSTRUCT *cfgst)
         FILE *fp;
 
         fp=fopen(filename,"rb");
-        if(fp==NULL) return;
-	LoadParse(cfgst,fp);
+        
+		if(fp==NULL)
+			return;	// In flash we'll always exit here
+		
+		LoadParse(cfgst,fp);
         fclose(fp);
 }
