@@ -882,12 +882,12 @@ int FlushEmulateSound(void)
 
   if(!timestamp) return(0);
 
-  // Tmp Flash hack until we enable sound
-  #ifdef FLASH
-	left = 0;
-	end = 0;
-	goto nosoundo;
-  #endif
+	//   // Tmp Flash hack until we enable sound
+	//   #ifdef FLASH
+	// left = 0;
+	// end = 0;
+	// goto nosoundo;
+	//   #endif
   
   if(!FSettings.SndRate)
   {
@@ -1104,6 +1104,31 @@ void FCEUI_SetSoundQuality(int quality)
 void FCEUI_SetSoundVolume(uint32 volume)
 {
  FSettings.SoundVolume=volume;
+}
+
+void FCEUI_SetTriangleVolume(uint32 volume)
+{
+	FSettings.TriangleVolume=volume;
+}
+
+void FCEUI_SetSquare1Volume(uint32 volume)
+{
+	FSettings.Square1Volume=volume;
+}
+
+void FCEUI_SetSquare2Volume(uint32 volume)
+{
+	FSettings.Square2Volume=volume;
+}
+
+void FCEUI_SetNoiseVolume(uint32 volume)
+{
+	FSettings.NoiseVolume=volume;
+}
+
+void FCEUI_SetPCMVolume(uint32 volume)
+{
+	FSettings.PCMVolume=volume;
 }
 
 

@@ -13,8 +13,12 @@
 
 #include "AS3.h"
 #include "flash_sdl.h"
+#include "flash_sdl-sound.h"
 
+#ifdef SDL
 #include "sdl-video.h"
+#endif
+
 #if NETWORK
 #include "unix-netplay.h"
 #endif
@@ -88,60 +92,61 @@ void DoDriverArgs(void) {}
 // Flash Entrance. Replace sdl.c's main()
 //
 
-int main(int argc, char *argv[])
+int main()
 {
 	// Build API
-	AS3_Val setupMethod = AS3_Function(NULL, FLASH_setup);
-	AS3_Val tickMethod = AS3_Function(NULL, FLASH_tick);
-	AS3_Val getDisplayPointerMethod = AS3_Function(NULL, FLASH_getDisplayPointer);
-	AS3_Val quitApplicationMethod = AS3_Function(NULL, FLASH_quitApplication);
-	AS3_Val setEventManagerMethod = AS3_Function(NULL, FLASH_setEventManager);
+	AS3_Val setupMethod = AS3_Function(NULL, (AS3_ThunkProc) f_setup);
+	AS3_Val tickMethod = AS3_Function(NULL, (AS3_ThunkProc) f_tick);
+	AS3_Val getDisplayPointerMethod = AS3_Function(NULL, (AS3_ThunkProc) f_getDisplayPointer);
+	AS3_Val quitApplicationMethod = AS3_Function(NULL, (AS3_ThunkProc) f_quitApplication);
+	AS3_Val setEventManagerMethod = AS3_Function(NULL, (AS3_ThunkProc) f_setEventManager);
+	AS3_Val paintSoundMethod = AS3_Function(NULL, (AS3_ThunkProc) f_PaintSound);
 	
-    AS3_Val libSDL = AS3_Object(
-								"setup:AS3ValType, tick:AS3ValType, getDisplayPointer:AS3ValType, quit:AS3ValType, setEventManager:AS3ValType", 
-								setupMethod, tickMethod, getDisplayPointerMethod, quitApplicationMethod, setEventManagerMethod
-								);
+    AS3_Val libNES = AS3_Object( "setup:AS3ValType, tick:AS3ValType, getDisplayPointer:AS3ValType, quit:AS3ValType, setEventManager:AS3ValType, paintSound:AS3ValType", 
+								 setupMethod, tickMethod, getDisplayPointerMethod, quitApplicationMethod, setEventManagerMethod, paintSoundMethod );
     
 	AS3_Release( setupMethod );
 	AS3_Release( tickMethod );
 	AS3_Release( getDisplayPointerMethod );
 	AS3_Release( quitApplicationMethod );
 	AS3_Release( setEventManagerMethod );
+	AS3_Release( paintSoundMethod );
 	
-    AS3_LibInit(libSDL);
+    AS3_LibInit(libNES);
     return 0;
 }
 
 
 // Flash API
 
-AS3_Val FLASH_setup(void *data, AS3_Val args)
+AS3_Val f_setup(void *data, AS3_Val args)
 {
-	FLASH_setup_sdl();
-	FLASH_setup_main();
+	f_setup_sdl();
+	f_setup_main();
 	return AS3_Int(0);
 }
 
 
-AS3_Val FLASH_setup_sdl()
+AS3_Val f_setup_sdl()
 {
 	// From main():
 	
 	FCEUD_Message("\nStarting FCE Ultra "FCEU_VERSION"...\n");
 	
+#ifdef SDL
 	if(SDL_Init(SDL_INIT_VIDEO)) /* SDL_INIT_VIDEO Needed for (joystick config) event processing? */
 	{
 		printf("Could not initialize SDL: %s.\n", SDL_GetError());
 		return(-1);
 	}
+#endif
 	
 	SetDefaults();
 	
 	return AS3_Int(0);
 }
 
-
-AS3_Val FLASH_tick(void *data, AS3_Val args)
+AS3_Val f_tick(void *data, AS3_Val args)
 {	
 	DoFun();
 	
@@ -149,28 +154,35 @@ AS3_Val FLASH_tick(void *data, AS3_Val args)
 }
 
 
-AS3_Val FLASH_quitApplication(void *data, AS3_Val args)
+AS3_Val f_quitApplication(void *data, AS3_Val args)
 {	
 	// Old CLIMain:
 	SaveConfig();
 	FCEUI_Kill();
-	
+
+#ifdef SDL
 	// Old main:
 	SDL_Quit();
+#endif
 	return(0); // always successful
 }
 
-
+#ifdef SDL
 extern SDL_Surface *screen;
-AS3_Val FLASH_getDisplayPointer(void *data, AS3_Val args)
+#endif
+AS3_Val f_getDisplayPointer(void *data, AS3_Val args)
 {
+	#ifdef SDL
 	return AS3_Ptr(screen->pixels);
+	#else
+	return AS3_Int(0);
+	#endif
 }
 
 
 // This is defined in SDL -- It's an AS3 reference to the event manager in the actionscript wrapper
 extern AS3_Val FLASH_EVENT_MANAGER_OBJECT;
-AS3_Val FLASH_setEventManager( void *data, AS3_Val args )
+AS3_Val f_setEventManager( void *data, AS3_Val args )
 {
 	AS3_Val eventManager;
 	AS3_ArrayValue( args, "AS3ValType", &eventManager );
@@ -196,14 +208,18 @@ void GetMouseData(uint32 *d)
 {
 	int x,y;
 	uint32 t;
-	
+
+#ifdef SDL	
 	t=SDL_GetMouseState(&x,&y);
-	
+#endif
+
 	d[2]=0;
+#ifdef SDL
 	if(t&SDL_BUTTON(1))
 		d[2]|=1;
 	if(t&SDL_BUTTON(3))
 		d[2]|=2;
+#endif
 	t=PtoV(x,y); 
 	d[0]=t&0xFFFF;
 	d[1]=(t>>16)&0xFFFF;
@@ -220,6 +236,7 @@ void KillKeyboard(void) {}
 
 void UpdatePhysicalInput(void)
 {
+#ifdef SDL
 	SDL_Event event;
 	
 	while(SDL_PollEvent(&event))
@@ -230,14 +247,19 @@ void UpdatePhysicalInput(void)
 		}
 	}
 	//SDL_PumpEvents();
+#endif
 }
 
 static uint8 *KeyState=NULL;
 
 char *GetKeyboard(void)
 {
+#ifdef SDL
 	KeyState=SDL_GetKeyState(0);
 	return((char *)KeyState);
+#else
+	return ((char ) 0);
+#endif
 }
 
 
@@ -276,11 +298,14 @@ static int bcpv,bcpj;
 
 int ButtonConfigBegin(void)
 {
+#ifdef SDL
 	SDL_Surface *screen;
 	SDL_QuitSubSystem(SDL_INIT_VIDEO);
+#endif
 	bcpv=KillVideo();
 	bcpj=KillJoysticks();
-	
+
+#ifdef SDL	
 	if(!(SDL_WasInit(SDL_INIT_VIDEO)&SDL_INIT_VIDEO))
 		if(SDL_InitSubSystem(SDL_INIT_VIDEO)==-1)
 		{
@@ -290,6 +315,8 @@ int ButtonConfigBegin(void)
 	
 	screen = SDL_SetVideoMode(300, 1, 8, 0); 
 	SDL_WM_SetCaption("Button Config",0);
+#endif
+	
 	InitJoysticks();
 	
 	return(1);
@@ -299,14 +326,18 @@ void ButtonConfigEnd(void)
 { 
 	extern FCEUGI *CurGame;
 	KillJoysticks();
+#ifdef SDL
 	SDL_QuitSubSystem(SDL_INIT_VIDEO); 
+#endif
 	if(bcpv) InitVideo(CurGame);
 	if(bcpj) InitJoysticks();
 }
 
 int DWaitButton(const uint8 *text, ButtConfig *bc, int wb)
 {
+#ifdef SDL
 	SDL_Event event;
+	
 	static int32 LastAx[64][64];
 	int x,y;
 	
@@ -356,13 +387,16 @@ int DWaitButton(const uint8 *text, ButtConfig *bc, int wb)
 				break;
 		}
 	}
+#endif
 	
 	return(0);
 }
 
 uint64 FCEUD_GetTime(void)
 {
+#ifdef SDL
 	return(SDL_GetTicks());
+#endif
 }
 
 uint64 FCEUD_GetTimeFreq(void)

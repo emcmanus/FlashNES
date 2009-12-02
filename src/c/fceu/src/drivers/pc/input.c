@@ -102,18 +102,18 @@ int NoWaiting=1;
 #ifndef EXTGUI
 static void DoCheatSeq(void)
 {
- #if defined(DOS) || defined(SDL)
+#if defined(DOS) || defined(SDL) || defined(FLASH)
  SilenceSound(1);
- #endif
+#endif
  KillKeyboard();
  KillVideo();
 
  DoConsoleCheatConfig();
  InitVideo(CurGame);
  InitKeyboard();
- #if defined(DOS) || defined(SDL)
+#if defined(DOS) || defined(SDL) || defined(FLASH)
  SilenceSound(0);
- #endif
+#endif
 }
 #endif
 
@@ -165,6 +165,7 @@ static void KeyboardCommands(void)
   is_shift = KEY(LEFTSHIFT) | KEY(RIGHTSHIFT);
   is_alt = KEY(LEFTALT) | KEY(RIGHTALT);
 
+   #ifdef SDL
 	if(keyonly(F4))
 	{
 		if(is_shift)
@@ -172,10 +173,15 @@ static void KeyboardCommands(void)
 		else
 			FCEUI_SetRenderDisable(2, -1);
 	}
+	#endif
 	
 	#if defined(SDL) && !defined(FLASH)
 		if(keyonly(ENTER) && is_alt) ToggleFS();
 	#endif
+
+
+// Disable most keyboard shortcuts in Flash
+#ifndef FLASH
 
 	NoWaiting &=~ 1;
 	
@@ -183,7 +189,7 @@ static void KeyboardCommands(void)
 	{
 		NoWaiting|=1;
 	}
-
+	
 	if(gametype==GIT_FDS)
 	{
 		if(keyonly(F6)) FCEUI_FDSSelect();
@@ -303,6 +309,7 @@ static void KeyboardCommands(void)
    if(keyonly(9)) SSM(9);
    #undef SSM
  }
+#endif
 }
 
 #define MK(x)   {{BUTTC_KEYBOARD},{0},{MKK(x)},1}					// Make key obj, 1 player?
@@ -317,8 +324,10 @@ ButtConfig GamePadConfig[4][10]={
         { 
 //	MK(KP3), MK(KP2), MK(TAB), MK(ENTER), MK(W), MK(Z),
 //				MK(A), MK(S), MKZ(), MKZ()
-	 MK(O), MK(P), MK(TAB), MK(ENTER), MK(W), MK(S),		// b, a, select, start, up, down, left, right, n/a, n/a
-                MK(A), MK(D), MKZ(), MKZ()
+	MK(O), MK(P), MK(TAB), MK(ENTER), MK(W), MK(S),		// b, a, select, start, up, down, left, right, n/a, n/a
+            MK(A), MK(D), MKZ(), MKZ()
+//	MK(C), MK(D), MK(TAB), MK(ENTER), MK(CURSORUP), MK(CURSORDOWN),		// b, a, select, start, up, down, left, right, n/a, n/a
+//			MK(CURSORLEFT), MK(CURSORRIGHT), MKZ(), MKZ()
 	},
 
         /* Gamepad 2 */
@@ -337,7 +346,7 @@ static void UpdateGamepad(void)
 	static int rapid=0;
 	uint32 JS=0;	// WHAT THE FUCK does js stand for? A bitvector that holds the states of all buttons on all controllers (4 controllers x 8 buttons)
 	int x;
-	int wg;	// WHAT THE FUCK DOES WG STAND FOR?? (I think it stands for "which gamepad." Oh, yeah. That's obvious.)
+	int wg;	// WHAT THE FUCK DOES WG STAND FOR?? (I think it stands for "which gamepad." Yeah that's obvious.)
 	
 	rapid ^= 1;
 	
@@ -365,11 +374,11 @@ static void UpdateGamepad(void)
 	
 	for(x=0; x<32; x+=8)	// Test to see if anything weird (up+down at same time) is happening, and correct
 	{
-		if( JS&(0xC0<<x) == 0xC0<<x )
+		if( (JS&(0xC0<<x)) == 0xC0<<x )
 		{
 			JS &=~ (0xC0<<x);
 		}
-		if( JS&(0x30<<x) == 0x30<<x )
+		if( (JS&(0x30<<x)) == 0x30<<x )
 		{
 			JS &=~ (0x30<<x);
 		}

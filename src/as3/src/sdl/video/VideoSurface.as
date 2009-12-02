@@ -62,6 +62,8 @@ package sdl.video {
 		
 		internal function onEnterFrame( e:Event ):void
 		{
+//			trace("video tick");
+			
 			// Render next frame
 			sdlApplication.cLib.tick();
 			

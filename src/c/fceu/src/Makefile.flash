@@ -7,10 +7,45 @@ SHELL = /bin/sh
 
 
 # CUSTOM CPP Directives
-MY_DEFS = -DNETWORK=0 -DUSE_SEXYAL=0 -DUSE_JACKACK=0 -DFLASH -DOSX
 
-# Config's Directives
-DEFS = $(MY_DEFS) -DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\" -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE=\"fceu\" -DVERSION=\"0.98.12\" -D_GNU_SOURCE=1 -DHAVE_ASPRINTF=1 -DHAVE_LIBZ=1 -DUNIX=1 -DPSS_STYLE=1 -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DSDL=1 -DLSB_FIRST=1 -DFCEU_VERSION=\"0.98.12\" -DFCEU_VERSION_NUMERIC=9812 -DFRAMESKIP=1
+MY_DEFS = \
+	-DNETWORK=0 \
+	-DUSE_SEXYAL=0 \
+	-DUSE_JACKACK=0 \
+	-DFLASH \
+	-DOSX \
+	-DFCEUX_SOUND \
+#	-DSDL=1 \
+
+
+# ./Configures's Directives
+
+DEFS = \
+	$(MY_DEFS) \
+	-DPACKAGE_NAME=\"\" \
+	-DPACKAGE_TARNAME=\"\" \
+	-DPACKAGE_VERSION=\"\" \
+	-DPACKAGE_STRING=\"\" \
+	-DPACKAGE_BUGREPORT=\"\" \
+	-DPACKAGE=\"fceu\" \
+	-DVERSION=\"0.98.12\" \
+	-D_GNU_SOURCE=1 \
+	-DHAVE_ASPRINTF=1 \
+	-DHAVE_LIBZ=1 \
+	-DUNIX=1 \
+	-DPSS_STYLE=1 \
+	-DSTDC_HEADERS=1 \
+	-DHAVE_SYS_TYPES_H=1 \
+	-DHAVE_SYS_STAT_H=1 \
+	-DHAVE_STDLIB_H=1 \
+	-DHAVE_STRING_H=1 \
+	-DHAVE_STRINGS_H=1 \
+	-DHAVE_INTTYPES_H=1 \
+	-DHAVE_STDINT_H=1 \
+	-DHAVE_UNISTD_H=1 \
+	-DLSB_FIRST=1 \
+	-DFCEU_VERSION=\"0.98.12\" \
+	-DFCEU_VERSION_NUMERIC=9812
 
 
 # Compiler Aliases
@@ -20,15 +55,14 @@ CXX = g++
 CXXCPP = g++ -E
 CCC = g++  -fno-rtti
 
-
 AR	= ar
 RANLIB	= ranlib
 OBJEXT = o
 
 INCLUDES = -I/Users/edmcmanus/alchemy/usr/local/include -I/Users/edmcmanus/alchemy/alchemy/avm2-libc/include
-LIBS = -L/Users/edmcmanus/alchemy/usr/local/lib -L/Users/edmcmanus/alchemy/alchemy/avm2-libc/lib -lz -lSDL
+LIBS = -L/Users/edmcmanus/alchemy/usr/local/lib -L/Users/edmcmanus/alchemy/alchemy/avm2-libc/lib -lz #-lSDL
 
-CCFLAGS = $(DEFS) $(LIBS) -O2
+CCFLAGS = $(DEFS) $(LIBS) -O2 -Wall
 
 
 # Common objects
@@ -38,7 +72,7 @@ OBJECTS = fceustr.o cart.o cheat.o crc32.o debug.o endian.o fceu.o fds.o file.o 
 OBJECTS += drivers/pc/flash_main.o drivers/pc/flash_sdl.o
 
 # SDL objects
-OBJECTS += drivers/pc/input.o drivers/pc/sdl-joystick.o drivers/pc/sdl-sound.o drivers/pc/sdl-throttle.o drivers/pc/sdl-video.o drivers/pc/unix-netplay.o
+OBJECTS += drivers/pc/input.o drivers/pc/sdl-joystick.o drivers/pc/flash_sdl-sound.o drivers/pc/sdl-throttle.o drivers/pc/sdl-video.o drivers/pc/unix-netplay.o
 
 
 
@@ -112,7 +146,7 @@ clean:
 	-rm -f drivers/pc/flash_main.$(OBJEXT)
 	-rm -f drivers/pc/sdl-joystick.$(OBJEXT)
 	-rm -f drivers/pc/sdl-opengl.$(OBJEXT)
-	-rm -f drivers/pc/sdl-sound.$(OBJEXT)
+	-rm -f drivers/pc/flash_sdl-sound.$(OBJEXT)
 	-rm -f drivers/pc/sdl-throttle.$(OBJEXT)
 	-rm -f drivers/pc/sdl-video.$(OBJEXT)
 	-rm -f drivers/pc/flash_sdl.$(OBJEXT)

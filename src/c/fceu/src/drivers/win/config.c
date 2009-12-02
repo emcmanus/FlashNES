@@ -78,7 +78,8 @@ static CFGSTRUCT fceuconfig[]={
 	AC(soundoptions),
 	AC(soundquality),
         AC(soundvolume),
-
+		
+		
         AC(goptions),
 	NAC("eoptions",eoptions),
         NACA("cpalette",cpalette),

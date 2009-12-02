@@ -340,7 +340,7 @@ void DoFun(void)
 
 int CLImain(int argc, char *argv[])
 {
-	// Body moved to FLASH_tick in flash_sdl
+	// Body moved to f_tick in flash_sdl
 }
 
 
@@ -348,7 +348,7 @@ int CLImain(int argc, char *argv[])
 
 // AS3 API
 
-AS3_Val FLASH_setup_main(void *data, AS3_Val args)
+AS3_Val f_setup_main(void *data, AS3_Val args)
 {
 	// From CLImain()
 	int ret;
@@ -438,6 +438,9 @@ void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count)
 	extern int FCEUDnetplay;
 #endif
 	//Count = 0;
+	// AS3_Trace(AS3_String("[DEBUG] FCEUD_Update, count = "));
+	// AS3_Trace(AS3_Int(Count));
+	
 	if(Count)
 	{
 		int32 can=GetWriteSound();

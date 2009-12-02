@@ -41,7 +41,7 @@ extern "C" {
 	int CLImain(int argc, char *argv[]);
 	
 	// Flash setup -- old main function
-	AS3_Val FLASH_setup_main();
+	AS3_Val f_setup_main();
 	
 #ifdef  __cplusplus
 }

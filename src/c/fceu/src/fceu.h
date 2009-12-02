@@ -71,6 +71,14 @@ typedef struct {
 	   uint32 SndRate;
 	   int soundq;
 	   int lowpass;
+	
+		// Porting FCEUX's Sound
+		int TriangleVolume;
+		int Square1Volume;
+		int Square2Volume;
+		int NoiseVolume;
+		int PCMVolume;
+		int SoundBufSize;
 } FCEUS;
 
 extern FCEUS FSettings;

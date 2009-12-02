@@ -227,7 +227,7 @@ void KillSound(void)
  } 
 }
 
-#elif !defined(FLASH)	// LATER, REMOVE THIS!
+#elif
 
 /* So we'll use SDL's evil sound support.  Ok. */
 static volatile int *Buffer = 0;
@@ -343,31 +343,4 @@ void KillSound(void)
 }
 
 
-#else
-
-// No sound support -- expose stubs
-
-int InitSound(FCEUGI *gi)
-{
-	#ifdef FLASH
-	FCEUD_Message("FCEU BUILT WITHOUT SOUND SUPPORT (FLASH BUILD).");
-	#endif
-	return 1;
-}
-void WriteSound(int32 *Buffer, int Count){}
-int KillSound(void)
-{
-	return 1;
-}
-uint32 GetMaxSound(void)
-{
-	return 0;
-}
-uint32 GetWriteSound(void)
-{
-	return 0;
-}
-void SilenceSound(int s) {}
-
 #endif
-

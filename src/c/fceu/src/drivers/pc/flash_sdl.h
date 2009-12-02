@@ -16,12 +16,12 @@
 
 // Flash Interface
 
-AS3_Val FLASH_setup(void *data, AS3_Val args);
-AS3_Val FLASH_setup_sdl();
-AS3_Val FLASH_tick(void *data, AS3_Val args);
-AS3_Val FLASH_quitApplication(void *data, AS3_Val args);
-AS3_Val FLASH_getDisplayPointer(void *data, AS3_Val args);
-AS3_Val FLASH_setEventManager( void *data, AS3_Val args );
+AS3_Val f_setup(void *data, AS3_Val args);
+AS3_Val f_setup_sdl();
+AS3_Val f_tick(void *data, AS3_Val args);
+AS3_Val f_quitApplication(void *data, AS3_Val args);
+AS3_Val f_getDisplayPointer(void *data, AS3_Val args);
+AS3_Val f_setEventManager( void *data, AS3_Val args );
 
 
 
