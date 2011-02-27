@@ -78,7 +78,7 @@ void FCEUD_PrintError(char *s)
 
 void FCEUD_MessageInt(int *i)
 {
-	AS3_Trace(AS3_Int(i));
+	AS3_Trace(AS3_Int((int) i));
 }
 
 void FCEUD_Message(char *s)
@@ -162,32 +162,6 @@ static void SetSignals(void (*t)(int))
 	int x;
 	for(x=0;x<11;x++)
 		signal(sigs[x],t);
-}
-
-static void CloseStuff(int signum)
-{
-	DriverKill();
-	printf("\nSignal %d has been caught and dealt with...\n",signum);
-	switch(signum)
-	{
-		case SIGINT:printf("How DARE you interrupt me!\n");break;
-		case SIGTERM:printf("MUST TERMINATE ALL HUMANS\n");break;
-		case SIGHUP:printf("Reach out and hang-up on someone.\n");break;
-		case SIGPIPE:printf("The pipe has broken!  Better watch out for floods...\n");break;
-		case SIGSEGV:printf("Iyeeeeeeeee!!!  A segmentation fault has occurred.  Have a fluffy day.\n");break;
-			/* So much SIGBUS evil. */
-#ifdef SIGBUS
-#if(SIGBUS!=SIGSEGV)
-		case SIGBUS:printf("I told you to be nice to the driver.\n");break;
-#endif
-#endif
-		case SIGFPE:printf("Those darn floating points.  Ne'er know when they'll bite!\n");break;
-		case SIGALRM:printf("Don't throw your clock at the meowing cats!\n");break;
-		case SIGABRT:printf("Abort, Retry, Ignore, Fail?\n");break;
-		case SIGUSR1:
-		case SIGUSR2:printf("Killing your processes is not nice.\n");break;
-	}
-	exit(1);
 }
 #endif
 
@@ -387,29 +361,34 @@ AS3_Val f_setup_main(void *data, AS3_Val args)
 
 static int DriverInitialize(FCEUGI *gi)
 {
-#ifndef WIN32
-	SetSignals(CloseStuff);
-#endif
-	
-	/* Initialize video before all else, due to some wacko dependencies
-	 in the SexyAL code(DirectSound) that need to be fixed.
-	 */
-	
-	if(!InitVideo(gi)) return 0;
-	inited|=4;
-	
-	if(InitSound(gi))
-		inited|=1;
-	
-	if(InitJoysticks())
-		inited|=2;
-	
-	if(!InitKeyboard()) return 0;
-	inited|=8;
-	
-	InitOtherInput();
-	return 1;
+	if(InitVideo(gi))	// Video required
+	{
+		inited |= 4;
+		
+		if(InitSound(gi))
+			inited |= 1;
+		
+		if(InitJoysticks())
+			inited |= 2;
+		
+		if(InitKeyboard())	// Keyboard required
+		{
+			inited |= 8;
+			InitOtherInput();
+			
+			return 1;		// OK
+		}
+		else
+		{
+			return 0;		// no keyboard
+		}
+	}
+	else
+	{
+		return 0;			// no video
+	}
 }
+
 
 static void DriverKill(void)
 {
@@ -434,13 +413,6 @@ static void DriverKill(void)
 
 void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count)
 {
-#if NETWORK
-	extern int FCEUDnetplay;
-#endif
-	//Count = 0;
-	// AS3_Trace(AS3_String("[DEBUG] FCEUD_Update, count = "));
-	// AS3_Trace(AS3_Int(Count));
-	
 	if(Count)
 	{
 		int32 can=GetWriteSound();
@@ -454,13 +426,14 @@ void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count)
 		
 		WriteSound(Buffer,can);
 		
-		//if(uflow) puts("Underflow");
 		tmpcan = GetWriteSound();
 		
 		if((tmpcan < Count*0.90) && !uflow)
 		{
-			if(XBuf && (inited&4) && !(NoWaiting & 2))
+			if(XBuf)
+			{
 				BlitScreen(XBuf);
+			}
 			Buffer+=can;
 			Count-=can;
 			if(Count)
@@ -472,40 +445,17 @@ void FCEUD_Update(uint8 *XBuf, int32 *Buffer, int Count)
 				}
 				WriteSound(Buffer,Count);
 			}
-		} //else puts("Skipped");
-#if NETWORK
-		else if(!NoWaiting && FCEUDnetplay && (uflow || tmpcan >= (Count * 1.8)))
-		{
-			if(Count > tmpcan) Count=tmpcan;
-			while(tmpcan > 0)
-			{
-				//    printf("Overwrite: %d\n", (Count <= tmpcan)?Count : tmpcan);
-				WriteSound(Buffer, (Count <= tmpcan)?Count : tmpcan);
-				tmpcan -= Count;
-			}
 		}
-#endif
 	}
 	else
 	{
-		if(!NoWaiting && !(eoptions&EO_NOTHROTTLE))
-			SpeedThrottle();
-		
-		if(XBuf && (inited&4))
+		if(XBuf)
 		{
 			BlitScreen(XBuf);
 		}
 	}
+	
 	FCEUD_UpdateInput();
-	//if(!Count && !NoWaiting && !(eoptions&EO_NOTHROTTLE))
-	// SpeedThrottle();
-	//if(XBuf && (inited&4))
-	//{
-	// BlitScreen(XBuf);
-	//}
-	//if(Count)
-	// WriteSound(Buffer,Count,NoWaiting);
-	//FCEUD_UpdateInput();
 }
 
 

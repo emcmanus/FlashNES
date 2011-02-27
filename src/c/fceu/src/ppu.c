@@ -1231,51 +1231,57 @@ int FCEUPPU_Loop(int skip)
   {
    X6502_Run(256+85);
    PPU_status |= 0x80;
-   PPU[3]=PPUSPL=0;             /* Not sure if this is correct.  According
-                                  to Matt Conte and my own tests, it is.  Timing is probably
-                                  off, though.  NOTE:  Not having this here
-                                  breaks a Super Donkey Kong game. */
-                                /* I need to figure out the true nature and length
-                                   of this delay. 
+   PPU[3]=PPUSPL=0;             /*	
+									Not sure if this is correct.  According to Matt Conte and my own tests, it is.  Timing is probably
+                                 	off, though.  NOTE:  Not having this here breaks a Super Donkey Kong game. I need to figure out the 
+									true nature and length of this delay. 
                                 */
-   X6502_Run(12);
-   if(FCEUGameInfo->type==GIT_NSF)
-    DoNSFFrame();
-   else
-   {
-    if(VBlankON)
-     TriggerNMI();
-   }
-   X6502_Run((scanlines_per_frame-242)*(256+85)-12); //-12); 
-   PPU_status&=0x1f;
-   X6502_Run(256);
+	X6502_Run(12);
+	
+	if(FCEUGameInfo->type==GIT_NSF)
+	{
+		DoNSFFrame();
+	}
+	else
+	{
+		if(VBlankON)
+		TriggerNMI();
+	}
+	X6502_Run((scanlines_per_frame-242)*(256+85)-12);
+	PPU_status&=0x1f;
+	X6502_Run(256);
+	
+	
+	int x;
 
-   {
-    int x;
+	if(ScreenON || SpriteON)
+	{
+		if(GameHBIRQHook && ((PPU[0]&0x38)!=0x18))
+			GameHBIRQHook();
+			
+		if(PPU_hook)
+			for(x=0;x<42;x++) {PPU_hook(0x2000); PPU_hook(0);}
+			
+		if(GameHBIRQHook2)
+			GameHBIRQHook2();
+	}
+	
+	X6502_Run(85-16);
+	
+	if(ScreenON || SpriteON)
+	{  
+		RefreshAddr=TempAddr;  
+		if(PPU_hook)
+			PPU_hook(RefreshAddr&0x3fff); 
+	}
 
-    if(ScreenON || SpriteON)
-    {
-     if(GameHBIRQHook && ((PPU[0]&0x38)!=0x18))
-      GameHBIRQHook();
-     if(PPU_hook)
-      for(x=0;x<42;x++) {PPU_hook(0x2000); PPU_hook(0);}
-     if(GameHBIRQHook2)
-      GameHBIRQHook2();
-    }
-    X6502_Run(85-16);
-    if(ScreenON || SpriteON)
-    {  
-     RefreshAddr=TempAddr;  
-     if(PPU_hook) PPU_hook(RefreshAddr&0x3fff);  
-    }
-
-    /* Clean this stuff up later. */
-    spork=numsprites=0;
-    ResetRL(XBuf);
-
-    X6502_Run(16-kook);
-    kook ^= 1;
-   }
+	/* Clean this stuff up later. */
+	spork=numsprites=0;
+	ResetRL(XBuf);
+	
+	X6502_Run(16-kook);
+	kook ^= 1;
+	
    if(FCEUGameInfo->type==GIT_NSF)
     X6502_Run((256+85)*240);
    #ifdef FRAMESKIP

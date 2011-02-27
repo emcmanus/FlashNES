@@ -33,10 +33,14 @@
 #endif
 
 #define MAX_JOYSTICKS	32
+
+#ifdef SDL
 static SDL_Joystick *Joysticks[MAX_JOYSTICKS] = {NULL};
+#endif
 
 int DTestButtonJoy(ButtConfig *bc)
 {
+#ifdef SDL
  int x;
 
  for(x=0;x<bc->NumC;x++)
@@ -60,6 +64,9 @@ int DTestButtonJoy(ButtConfig *bc)
     return(1);
  }
  return(0);
+#else
+ return 0;
+#endif
 }
 
 static int jinited=0;
@@ -67,6 +74,7 @@ static int jinited=0;
 /* Cleanup opened joysticks. */
 int KillJoysticks (void)
 {
+#ifdef SDL
 	int n;			/* joystick index */
 
 	if(!jinited) return(0);
@@ -77,12 +85,14 @@ int KillJoysticks (void)
 		Joysticks[n]=0;
 	}
 	SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+#endif
 	return(1);
 }
 
 /* Initialize joysticks. */
 int InitJoysticks (void)
 {
+#ifdef SDL
 	int n;			/* joystick index */
 	int total;
 
@@ -98,6 +108,7 @@ int InitJoysticks (void)
 	 //joy[n] - 1, SDL_GetError());
  	 continue;
 	}
+#endif
 	jinited=1;
 	return(1);
 }

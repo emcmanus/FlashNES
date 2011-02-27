@@ -140,16 +140,23 @@ void SetupCartCHRMapping(int chip, uint8 *p, uint32 size, int ram)
  CHRram[chip]=ram;
 }
 
+// Notes on macro expansion:
+// Expansions:
+// uint8 FP_FASTAPASS(1) CartBR (uint32 A)
+// uint8 __fastcall CartBR (uint32 A) <-- if llvm-gcc supported __fastcall
+
+// TESTING
+// Moved this into cart.h as a macro definition
 DECLFR(CartBR)
 {
- return Page[A>>11][A];
+	return Page[A>>11][A];
 }
 
 DECLFW(CartBW)
 {
- //printf("Ok: %04x:%02x, %d\n",A,V,PRGIsRAM[A>>11]);
- if(PRGIsRAM[A>>11] && Page[A>>11])
-  Page[A>>11][A]=V;
+	//printf("Ok: %04x:%02x, %d\n",A,V,PRGIsRAM[A>>11]);
+	if(PRGIsRAM[A>>11] && Page[A>>11])
+		Page[A>>11][A]=V;
 }
 
 DECLFR(CartBROB)

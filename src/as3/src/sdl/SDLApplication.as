@@ -64,10 +64,6 @@ package sdl {
 		{
 			this.cLoader = new CLibInit();
 			
-			// Select SDL drivers
-			this.cLoader.putEnv( "SDL_VIDEODRIVER", "flash" );
-//			this.cLoader.putEnv( "SDL_AUDIODRIVER", "flash" );
-			
 			
 			// NOTES
 			
@@ -80,6 +76,7 @@ package sdl {
 			// Shit! Now sound doesn't work.
 			
 			// Clearly sound wasn't being emulated. 30FPS is apparently the framerate without audio.
+			
 			
 			this.cLoader.supplyFile( "balloonboy.rom", romData );
 			

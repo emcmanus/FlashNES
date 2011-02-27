@@ -49,6 +49,9 @@ DEFS = \
 
 
 # Compiler Aliases
+# TESTING DEBUG TODO HACK
+# Changed gcc to gcc_test in the following two lines
+# gcc_test contains some modifications to explore new llvm parameters
 CC = gcc
 CPP = gcc -E
 CXX = g++
@@ -62,7 +65,7 @@ OBJEXT = o
 INCLUDES = -I/Users/edmcmanus/alchemy/usr/local/include -I/Users/edmcmanus/alchemy/alchemy/avm2-libc/include
 LIBS = -L/Users/edmcmanus/alchemy/usr/local/lib -L/Users/edmcmanus/alchemy/alchemy/avm2-libc/lib -lz #-lSDL
 
-CCFLAGS = $(DEFS) $(LIBS) -O2 -Wall
+CCFLAGS = $(DEFS) $(LIBS) -O2
 
 
 # Common objects
@@ -72,7 +75,7 @@ OBJECTS = fceustr.o cart.o cheat.o crc32.o debug.o endian.o fceu.o fds.o file.o 
 OBJECTS += drivers/pc/flash_main.o drivers/pc/flash_sdl.o
 
 # SDL objects
-OBJECTS += drivers/pc/input.o drivers/pc/sdl-joystick.o drivers/pc/flash_sdl-sound.o drivers/pc/sdl-throttle.o drivers/pc/sdl-video.o drivers/pc/unix-netplay.o
+OBJECTS += drivers/pc/input.o drivers/pc/sdl-joystick.o drivers/pc/flash_sdl-sound.o drivers/pc/sdl-throttle.o drivers/pc/flash_sdl-video.o drivers/pc/unix-netplay.o
 
 
 
@@ -148,7 +151,7 @@ clean:
 	-rm -f drivers/pc/sdl-opengl.$(OBJEXT)
 	-rm -f drivers/pc/flash_sdl-sound.$(OBJEXT)
 	-rm -f drivers/pc/sdl-throttle.$(OBJEXT)
-	-rm -f drivers/pc/sdl-video.$(OBJEXT)
+	-rm -f drivers/pc/flash_sdl-video.$(OBJEXT)
 	-rm -f drivers/pc/flash_sdl.$(OBJEXT)
 	-rm -f drivers/pc/unix-netplay.$(OBJEXT)
 	-rm -f drivers/sexyal/convert.$(OBJEXT)

@@ -3,7 +3,11 @@
 #else
 #include "sdl.h"
 #endif
+
+#ifdef SDL
 #include <SDL/SDL_net.h>
+#endif
+
 #include "sdl-netplay.h"
 
 char *ServerHost;
@@ -36,6 +40,7 @@ static uint32 de32(uint8 *morp)
 
 int FCEUD_NetworkConnect(void)
 {
+#ifdef SDL	
  IPaddress rip;
 
  SDLNet_Init();
@@ -98,6 +103,7 @@ int FCEUD_NetworkConnect(void)
 
  rip.port=RemotePortUDP;
  SDLNet_UDP_Bind(UDPSocket, 0, &rip);
+#endif
 }
 
 
@@ -105,6 +111,7 @@ int FCEUD_NetworkConnect(void)
 
 static int CheckUDP(uint8 *packet, int32 len, int32 alt)
 {
+#ifdef SDL
  uint32 crc;
  uint32 repcrc;
 
@@ -126,6 +133,7 @@ static int CheckUDP(uint8 *packet, int32 len, int32 alt)
  else
   if(de32(packet)!=incounter) /* Time warped packet. */
    return(0);
+#endif
  return(1);
 }
  
@@ -158,12 +166,15 @@ static uint8 *MakeTCP(uint8 *data, int32 len)
 
 void FCEUD_NetworkClose(void)
 {
+#ifdef SDL
  SDLNet_Quit();
+#endif
 }
 
 /* 1 byte to server */
 int FCEUD_SendDataToServer(uint8 v,uint8 cmd)
 {
+#ifdef SDL
         UDPpacket upack;
  
         upack.channel=0;
@@ -173,12 +184,14 @@ int FCEUD_SendDataToServer(uint8 v,uint8 cmd)
  
         SDLNet_UDP_Send(UDPSocket,0,&upack);
 
-        outcounter++; 
+        outcounter++;
+#endif
         return(1);   
 }
 
 void FCEUD_SendDataToClients(uint8 *data)
 {
+#ifdef SDL
 	UDPpacket upack;
 
 	SDLNet_TCP_Send(Socket,MakeTCP(data,5),TCPHEADSIZE+5);
@@ -191,11 +204,13 @@ void FCEUD_SendDataToClients(uint8 *data)
 	SDLNet_UDP_Send(UDPSocket,0,&upack);
 
 	outcounter++;
+#endif
 	return(1);
 }
 
 int FCEUD_GetDataFromServer(uint8 *data)
 {
+#ifdef SDL
   uint8 buf[128];    
   NoWaiting&=~2;
 
@@ -225,4 +240,7 @@ int FCEUD_GetDataFromServer(uint8 *data)
 
 
   }
+#else
+	return 1;
+#endif
 }

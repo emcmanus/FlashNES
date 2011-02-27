@@ -95,7 +95,7 @@ int InitVideo(FCEUGI *gi)
 
     FCEUI_printf("Initializing video...");
 
-    FCEUI_GetCurrentVidSystem( & srendline, &erendline);
+    FCEUI_GetCurrentVidSystem( &srendline, &erendline);
 
     if (_fullscreen)
 	{

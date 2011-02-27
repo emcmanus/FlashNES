@@ -876,7 +876,7 @@ void SetNESSoundMap(void)
 
 static int32 inbuf=0;
 int FlushEmulateSound(void)
-{
+{  
   int x;
   int32 end,left;
 

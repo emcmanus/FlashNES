@@ -32,8 +32,11 @@ void SetupCartCHRMapping(int chip, uint8 *p, uint32 size, int ram);
 void SetupCartMirroring(int m, int hard, uint8 *extra);
 
 DECLFR(CartBROB);
-DECLFR(CartBR);
 DECLFW(CartBW);
+
+// Testing Macro Inlines
+// #define CartBR(A) Page[(A)>>11][(A)]
+DECLFR(CartBR);
 
 extern uint8 *PRGptr[32];
 extern uint8 *CHRptr[32];

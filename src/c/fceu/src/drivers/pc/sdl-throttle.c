@@ -17,11 +17,10 @@ void RefreshThrottleFPS(void)
 
 void SpeedThrottle(void)
 {
-
   // Don't need to throttle in flash, we let the update timer handle this for us
-  #ifdef FLASH
+#ifdef FLASH
     return;
-  #endif
+#else
 	
  static uint64 ttime,ltime=0;
   
@@ -44,5 +43,8 @@ void SpeedThrottle(void)
   ltime=ttime;
  else
   ltime+=tfreq/desiredfps;
+
+#endif
+
 }
 

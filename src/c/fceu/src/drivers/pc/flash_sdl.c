@@ -102,8 +102,8 @@ int main()
 	AS3_Val setEventManagerMethod = AS3_Function(NULL, (AS3_ThunkProc) f_setEventManager);
 	AS3_Val paintSoundMethod = AS3_Function(NULL, (AS3_ThunkProc) f_PaintSound);
 	
-    AS3_Val libNES = AS3_Object( "setup:AS3ValType, tick:AS3ValType, getDisplayPointer:AS3ValType, quit:AS3ValType, setEventManager:AS3ValType, paintSound:AS3ValType", 
-								 setupMethod, tickMethod, getDisplayPointerMethod, quitApplicationMethod, setEventManagerMethod, paintSoundMethod );
+  AS3_Val libNES = AS3_Object( "setup:AS3ValType, tick:AS3ValType, getDisplayPointer:AS3ValType, quit:AS3ValType, setEventManager:AS3ValType, paintSound:AS3ValType", 
+							 setupMethod, tickMethod, getDisplayPointerMethod, quitApplicationMethod, setEventManagerMethod, paintSoundMethod );
     
 	AS3_Release( setupMethod );
 	AS3_Release( tickMethod );
@@ -112,8 +112,8 @@ int main()
 	AS3_Release( setEventManagerMethod );
 	AS3_Release( paintSoundMethod );
 	
-    AS3_LibInit(libNES);
-    return 0;
+  AS3_LibInit(libNES);
+  return 0;
 }
 
 
@@ -192,9 +192,10 @@ AS3_Val f_setEventManager( void *data, AS3_Val args )
 	return AS3_Int(0);
 }
 
-// Back to the Future Part C...
 
 
+
+// Back to the Future: Part C...
 
 
 

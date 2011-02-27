@@ -228,11 +228,12 @@ void WriteSound(int32 *buf, int Count)
 		}
 		
 		// Notes:
-		//  - s_Buffer is an array of floats, alternating floats for left and right channels
+		//  - s_Buffer is an array of floats, alternating (interpolating) floats for left and right channels
 		//  - s_BufferWrite is the position to write to
 		//  - *buf is the current int to write as a float
 		//	- *buf is an array of signed ints, but we need to convert them into floats in the range of 0-1
 		//	- To do that, divide the current buf value by 32768.0f (2^15, bit reserved for sign)
+		// ed: is it an int or a short? use 2^31 is it's an int.
 		
 		// s_Buffer[s_BufferWrite] = s_Buffer[s_BufferWrite + 1] = (float *)buf / 32768.0f;	// MONO -> STEREO
 		// s_BufferWrite = (s_BufferWrite + 2) % (s_BufferSize);

@@ -12,13 +12,12 @@ package {
 	import sdl.SDLApplication;
 	import sdl.video.VideoSurface;
 	
-	
 	//
 	// FCE ULTRA
 	//
 	
 	
-	[SWF(width=800,height=600,frameRate=60)]
+	[SWF(width=800,height=600,frameRate=100)]
 	public class flashnes extends Sprite {
 		
 		private var surface:VideoSurface;
@@ -41,7 +40,7 @@ package {
 			if ( !romString )
 			{
 				// Testing
-				romString = "http://10.0.1.4/test_roms/nes/Wizards & Warriors (U).nes";
+				romString = "http://localhost/test_roms/nes/Wizards & Warriors (U).nes";
 			}
 			
 			this.romLoader.load(new URLRequest( romString ));

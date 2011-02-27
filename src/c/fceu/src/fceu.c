@@ -56,10 +56,10 @@ void (*GameInterface)(int h);
 
 void (*GameStateRestore)(int version);
 
-readfunc ARead[0x10000];
-writefunc BWrite[0x10000];
-static readfunc *AReadG;
-static writefunc *BWriteG;
+readfunc ARead[0x10000];	// 65k address space
+writefunc BWrite[0x10000];	// 65k
+static readfunc *AReadG;	// Global ARead, only accessilbe in this file
+static writefunc *BWriteG;	// Global BWrite, only accessible in this file
 static int RWWrap=0;
 
 static DECLFW(BNull)
@@ -114,7 +114,7 @@ void FASTAPASS(3) SetReadHandler(int32 start, int32 end, readfunc func)
   int32 x;
 
   if(!func)
-   func=ANull;
+   func=ANull;	// return(X.DB);
 
   if(RWWrap)
    for(x=end;x>=start;x--)
@@ -125,9 +125,10 @@ void FASTAPASS(3) SetReadHandler(int32 start, int32 end, readfunc func)
      ARead[x]=func;
    }
   else
-
+  {
    for(x=end;x>=start;x--)
     ARead[x]=func;
+  }
 }
 
 writefunc FASTAPASS(1) GetWriteHandler(int32 a)

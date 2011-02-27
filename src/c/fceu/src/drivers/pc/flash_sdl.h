@@ -7,7 +7,9 @@
  *
  */
 
+#ifdef SDL
 #include <SDL.h>
+#endif
 
 #include "AS3.h"
 #include "flash_main.h"

@@ -12,6 +12,11 @@
 #include "unix-netplay.h"
 #endif
 
+//
+// Original version of sdl.c -- Not included in flash builds!
+// 
+
+
 DSETTINGS Settings;
 CFGSTRUCT DriverConfig[]={
 	#ifdef OPENGL

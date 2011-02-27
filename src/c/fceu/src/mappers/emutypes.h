@@ -14,6 +14,16 @@
 #endif
 #endif
 
+
+// llvm-gcc supports inline!
+#ifdef FLASH
+#undef INLINE
+#define INLINE inline
+#endif
+
+
+
+
 #if defined(EMU_DLL_IMPORTS)
 #define EMU2149_DLL_IMPORTS
 #define EMU2212_DLL_IMPORTS
